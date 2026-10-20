@@ -1,0 +1,110 @@
+/* src/index.css */
+
+/* These three lines are crucial for Tailwind CSS to work */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom @keyframes for animations not directly provided by Tailwind's defaults */
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.7; }
+}
+@keyframes pulse-slow-reverse {
+  0%, 100% { transform: scale(1.1); opacity: 0.7; }
+  50% { transform: scale(1); opacity: 0.5; }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Classes to apply animations and delays */
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+  opacity: 0; /* Ensures it starts invisible before animation */
+}
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+
+/* Styles for scroll-triggered fade-in effects */
+.fade-in-section, .fade-in-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Background animation for subtle movement */
+@keyframes subtle-move {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+.animate-subtle-move {
+    animation: subtle-move 30s linear infinite alternate;
+}
+
+/* David Langarica inspired abstract background shapes animation */
+@keyframes shape-move-1 {
+    0% { transform: translate(-20%, -20%) scale(1); }
+    50% { transform: translate(-10%, -10%) scale(1.1); }
+    100% { transform: translate(-20%, -20%) scale(1); }
+}
+@keyframes shape-move-2 {
+    0% { transform: translate(20%, 20%) scale(1.1); }
+    50% { transform: translate(10%, 10%) scale(1); }
+    100% { transform: 'translate(20%, 20%) scale(1.1)'; }
+}
+@keyframes shape-move-3 {
+    0% { transform: translate(-10%, 30%) scale(0.9); }
+    50% { transform: 'translate(-20%, 20%) scale(1)'; }
+    100% { transform: 'translate(-10%, 30%) scale(0.9)'; }
+}
+
+/* Applying shape animations */
+.shape-bg-1 { animation: shape-move-1 25s ease-in-out infinite alternate; }
+.shape-bg-2 { animation: shape-move-2 30s ease-in-out infinite alternate; }
+.shape-bg-3 { animation: shape-move-3 28s ease-in-out infinite alternate; }
+
+/* Rolling Icons Animation - Adjusted for new background */
+@keyframes fluid-float {
+  0% { transform: translate(0vw, 0vh) rotate(0deg) scale(0.8); opacity: 0.1; }
+  20% { transform: translate(15vw, 20vh) rotate(72deg) scale(0.9); opacity: 0.2; }
+  40% { transform: translate(30vw, 5vh) rotate(144deg) scale(1.0); opacity: 0.3; }
+  60% { transform: translate(45vw, 25vh) rotate(216deg) scale(0.9); opacity: 0.2; }
+  80% { transform: translate(60vw, 10vh) rotate(288deg) scale(0.8); opacity: 0.1; }
+  100% { transform: translate(75vw, 0vh) rotate(360deg) scale(0.7); opacity: 0.05; }
+}
+/* Applying icon floating animations with delays and initial positions */
+.icon-float-1 { animation: fluid-float 30s linear infinite; animation-delay: 0s; top: 5%; left: 0%; }
+.icon-float-2 { animation: fluid-float 35s linear infinite reverse; animation-delay: 5s; top: 15%; left: 10%; }
+.icon-float-3 { animation: fluid-float 25s linear infinite; animation-delay: 10s; top: 30%; left: 60%; transform: scale(0.8); }
+.icon-float-4 { animation: fluid-float 40s linear infinite reverse; animation-delay: 15s; top: 40%; left: 85%; transform: scale(1.2); }
+.icon-float-5 { animation: fluid-float 28s linear infinite; animation-delay: 20s; top: 55%; left: 20%; transform: scale(0.9); }
+.icon-float-6 { animation: fluid-float 32s linear infinite reverse; animation-delay: 25s; top: 70%; left: 45%; transform: scale(1.1); }
+.icon-float-7 { animation: fluid-float 38s linear infinite; animation-delay: 30s; top: 85%; left: 5%; transform: scale(0.7); }
+.icon-float-8 { animation: fluid-float 27s linear infinite reverse; animation-delay: 35s; top: 5%; left: 40%; transform: scale(1.0); }
+.icon-float-9 { animation: fluid-float 33s linear infinite; animation-delay: 40s; top: 20%; left: 30%; transform: scale(0.95); }
+
+/* Custom Scrollbar Style for Modal (Webkit browsers like Chrome/Edge) */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #007bff;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #0056b3;
+}

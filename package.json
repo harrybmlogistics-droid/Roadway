@@ -1,0 +1,24 @@
+{
+  "name": "roadway-logistics-group",
+  "version": "1.0.0",
+  "description": "Roadway Logistics Group LLC - Full-Stack Interactive Logistics & Dispatch Platform",
+  "private": true,
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "build": "cd frontend && npm run build",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && npm run dev",
+    "install:all": "cd frontend && npm install && cd ../backend && npm install"
+  },
+  "keywords": [
+    "trucking",
+    "dispatch",
+    "logistics",
+    "fmcsa",
+    "freight",
+    "owner-operator"
+  ],
+  "author": "Roadway Logistics Group LLC",
+  "license": "ISC"
+}
