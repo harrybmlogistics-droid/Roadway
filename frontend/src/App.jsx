@@ -1,9 +1,10 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import {
   Truck, ShieldCheck, DollarSign, Calculator, Users, Clock,
   Globe, Phone, Mail, MapPin, ArrowRight, CheckCircle2,
   X, Menu, Check, ChevronDown, Zap, Layers, Monitor, FileCheck,
-  Loader2, AlertCircle, BarChart3, Database, RefreshCw
+  Loader2, AlertCircle, BarChart3, Database, RefreshCw,
+  Play, Pause, RotateCcw
 } from 'lucide-react';
 import { api } from './api';
 
@@ -284,6 +285,238 @@ export default function App() {
   // SECTION RENDERERS
   // ════════════════════════════════════════════════════════════════════════════
 
+  // ─── CINEMATIC HERO SCROLL SEQUENCE (240 FRAMES) ─────────────────────────
+  const TOTAL_HERO_FRAMES = 240;
+
+  const CinematicHeroCanvas = ({ onNav }) => {
+    const canvasRef = useRef(null);
+    const containerRef = useRef(null);
+    const imagesRef = useRef([]);
+    const [currentFrame, setCurrentFrame] = useState(1);
+    const [loadedCount, setLoadedCount] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isReady, setIsReady] = useState(false);
+    const animFrameId = useRef(null);
+
+    // Preload frames progressively
+    useEffect(() => {
+      let mounted = true;
+      const imgs = [];
+      let loaded = 0;
+
+      for (let i = 1; i <= TOTAL_HERO_FRAMES; i++) {
+        const img = new Image();
+        const padded = String(i).padStart(3, '0');
+        img.src = `/hero-frames/ezgif-frame-${padded}.jpg`;
+        img.onload = () => {
+          if (!mounted) return;
+          loaded++;
+          setLoadedCount(loaded);
+          if (i === 1) {
+            setIsReady(true);
+            renderFrame(1, img);
+          }
+        };
+        imgs.push(img);
+      }
+      imagesRef.current = imgs;
+
+      return () => {
+        mounted = false;
+        if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
+      };
+    }, []);
+
+    const renderFrame = useCallback((frameIdx, overrideImg = null) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const img = overrideImg || imagesRef.current[frameIdx - 1];
+      if (!img || !img.complete || img.naturalWidth === 0) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+
+      if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+      }
+
+      ctx.save();
+      ctx.scale(dpr, dpr);
+
+      // Object-fit: cover math
+      const hRatio = w / img.naturalWidth;
+      const vRatio = h / img.naturalHeight;
+      const ratio = Math.max(hRatio, vRatio);
+      const cx = (w - img.naturalWidth * ratio) / 2;
+      const cy = (h - img.naturalHeight * ratio) / 2;
+
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(img, cx, cy, img.naturalWidth * ratio, img.naturalHeight * ratio);
+      ctx.restore();
+    }, []);
+
+    // Listen to window scroll to scrub frames
+    useEffect(() => {
+      let ticking = false;
+
+      const onScroll = () => {
+        if (isPlaying) return; // Don't interrupt auto-playback
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            if (!containerRef.current) {
+              ticking = false;
+              return;
+            }
+            const rect = containerRef.current.getBoundingClientRect();
+            const windowH = window.innerHeight;
+            // Calculate visibility progress: 0 when just entering bottom, 1 when scrolling past top
+            const progress = Math.max(0, Math.min(1, (windowH - rect.top) / (windowH + rect.height * 0.75)));
+            const target = Math.min(TOTAL_HERO_FRAMES, Math.max(1, Math.round(progress * (TOTAL_HERO_FRAMES - 1)) + 1));
+
+            setCurrentFrame(target);
+            renderFrame(target);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      const onResize = () => renderFrame(currentFrame);
+      window.addEventListener('resize', onResize, { passive: true });
+      return () => {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onResize);
+      };
+    }, [isPlaying, currentFrame, renderFrame]);
+
+    // Handle Auto-Play animation loop (~30 fps)
+    useEffect(() => {
+      if (!isPlaying) {
+        if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
+        return;
+      }
+
+      const fpsInterval = 1000 / 30; // 30 FPS playback
+      let lastTime = performance.now();
+
+      const loop = (currentTime) => {
+        const elapsed = currentTime - lastTime;
+        if (elapsed > fpsInterval) {
+          lastTime = currentTime - (elapsed % fpsInterval);
+          setCurrentFrame((prev) => {
+            const next = prev >= TOTAL_HERO_FRAMES ? 1 : prev + 1;
+            renderFrame(next);
+            return next;
+          });
+        }
+        animFrameId.current = requestAnimationFrame(loop);
+      };
+
+      animFrameId.current = requestAnimationFrame(loop);
+      return () => {
+        if (animFrameId.current) cancelAnimationFrame(animFrameId.current);
+      };
+    }, [isPlaying, renderFrame]);
+
+    // Manual scrubber change
+    const handleScrub = (e) => {
+      setIsPlaying(false);
+      const val = parseInt(e.target.value, 10);
+      setCurrentFrame(val);
+      renderFrame(val);
+    };
+
+    const progressPct = Math.round((currentFrame / TOTAL_HERO_FRAMES) * 100);
+
+    return (
+      <div ref={containerRef} className="relative rounded-3xl overflow-hidden border-2 border-white shadow-[0_20px_60px_rgba(15,23,42,0.18)] aspect-[16/11] bg-slate-900 group">
+        {/* Canvas */}
+        <canvas
+          ref={canvasRef}
+          className="w-full h-full block object-cover transition-opacity duration-300"
+          style={{ opacity: isReady ? 1 : 0.4 }}
+        />
+
+        {/* Cinematic Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/70 via-transparent to-[#0F172A]/20 pointer-events-none" />
+
+        {/* Top Left: Dispatch Pricing Card */}
+        <div className="absolute top-3 left-3 sm:top-5 sm:left-5 bg-white/90 backdrop-blur-xl border border-white/80 rounded-2xl p-3.5 sm:p-4 shadow-[0_12px_32px_rgba(0,102,255,0.18)] z-10 max-w-[200px] sm:max-w-xs pointer-events-auto">
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#0066FF] animate-pulse" />
+            <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#0066FF]">Dispatch Pricing</p>
+          </div>
+          <div className="space-y-1 text-xs text-[#0F172A]">
+            <div className="flex justify-between gap-3"><span className="text-[#475569]">Semi Truck:</span><span className="font-extrabold text-[#0066FF]">$250/wk</span></div>
+            <div className="flex justify-between gap-3"><span className="text-[#475569]">Box/Hotshot:</span><span className="font-extrabold text-[#0066FF]">$350/wk</span></div>
+          </div>
+          <button onClick={() => onNav('pricing')} className="mt-2 text-[11px] font-bold text-[#0066FF] hover:underline flex items-center gap-1">
+            <span>Explore All 14 Rates</span><ArrowRight className="w-3 h-3" />
+          </button>
+        </div>
+
+        {/* Top Right: Status / Frame Counter Badge */}
+        <div className="absolute top-3 right-3 sm:top-5 sm:right-5 flex items-center gap-2 z-10 pointer-events-auto">
+          <div className="bg-slate-900/80 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-[11px] font-mono text-white flex items-center gap-2 shadow-lg">
+            <span className="inline-block w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+            <span>Cinematic Scroll</span>
+            <span className="text-blue-300 font-bold">#{String(currentFrame).padStart(3, '0')}</span>
+          </div>
+        </div>
+
+        {/* Bottom Center / Controls: Interactive Scrubber & Autoplay */}
+        <div className="absolute bottom-3 inset-x-3 sm:bottom-4 sm:inset-x-5 z-10 pointer-events-auto">
+          <div className="bg-slate-900/85 backdrop-blur-xl border border-white/20 rounded-2xl p-2.5 sm:p-3 shadow-2xl flex flex-col gap-2">
+            {/* Controls Bar */}
+            <div className="flex items-center justify-between gap-3 text-xs text-white">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsPlaying(!isPlaying)}
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0066FF] hover:bg-blue-600 text-white flex items-center justify-center transition shadow-md shrink-0 cursor-pointer"
+                  title={isPlaying ? 'Pause Animation' : 'Auto-Play Cinematic Sequence'}
+                >
+                  {isPlaying ? <Pause className="w-3.5 h-3.5 fill-current" /> : <Play className="w-3.5 h-3.5 fill-current ml-0.5" />}
+                </button>
+                <div className="leading-tight">
+                  <span className="text-[11px] sm:text-xs font-bold text-white block">
+                    {isPlaying ? 'Auto-Playing Sequence' : 'Scroll Page or Drag to Scrub'}
+                  </span>
+                  <span className="text-[10px] text-slate-300 font-mono">
+                    Frame {currentFrame} / {TOTAL_HERO_FRAMES} ({progressPct}%)
+                  </span>
+                </div>
+              </div>
+
+              <div className="hidden sm:flex items-center gap-2 text-[11px] text-slate-300">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span>240 Frames Loaded ({loadedCount})</span>
+              </div>
+            </div>
+
+            {/* Scrub Track */}
+            <div className="relative flex items-center">
+              <input
+                type="range"
+                min="1"
+                max={TOTAL_HERO_FRAMES}
+                value={currentFrame}
+                onChange={handleScrub}
+                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#0066FF] hover:bg-white/30 transition"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const Hero = () => (
     <section className="glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden">
       <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#0066FF]/10 blur-3xl pointer-events-none" />
@@ -316,23 +549,7 @@ export default function App() {
           </div>
         </div>
         <div className="lg:col-span-6 relative">
-          <div className="relative rounded-3xl overflow-hidden border-2 border-white shadow-[0_20px_50px_rgba(15,23,42,0.12)] aspect-[16/11] bg-slate-100">
-            <img src={VISUALS.hero} alt="Semi Truck on Highway" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#0F172A]/30 via-transparent to-white/20" />
-            <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-white/85 backdrop-blur-xl border border-white rounded-2xl p-4 shadow-[0_12px_32px_rgba(0,102,255,0.15)]">
-              <p className="text-xs font-bold uppercase text-[#0066FF] mb-2">Dispatch Pricing</p>
-              <div className="space-y-1.5 text-xs text-[#0F172A]">
-                <div className="flex justify-between gap-4"><span className="text-[#475569]">Semi Truck:</span><span className="font-extrabold">$250/week</span></div>
-                <div className="flex justify-between gap-4"><span className="text-[#475569]">Box/Hotshot:</span><span className="font-extrabold">$350/week</span></div>
-              </div>
-              <button onClick={() => nav('pricing')} className="mt-2 text-xs font-bold text-[#0066FF] hover:underline flex items-center gap-1">
-                <span>Learn More</span><ArrowRight className="w-3 h-3" />
-              </button>
-            </div>
-            <div className="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-md text-white px-3.5 py-1.5 rounded-full text-xs font-medium border border-white/20">
-              0% Commission · 3-Day Free Trial
-            </div>
-          </div>
+          <CinematicHeroCanvas onNav={nav} />
         </div>
       </div>
 

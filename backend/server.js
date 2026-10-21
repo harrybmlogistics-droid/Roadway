@@ -21,7 +21,7 @@ const db         = require('./db');
 const mailer     = require('./mailer');
 
 const app  = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // ─── Security & Middleware ───────────────────────────────────────────────────
 app.use(helmet({
@@ -308,9 +308,9 @@ app.use((err, req, res, _next) => {
 
 // ─── Start Server ─────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`\n🚛  Roadway Logistics Group LLC — Backend API`);
-  console.log(`   Server running on http://localhost:${PORT}`);
-  console.log(`   Health: http://localhost:${PORT}/api/health`);
-  console.log(`   Submissions: http://localhost:${PORT}/api/submissions`);
-  console.log(`   Stats: http://localhost:${PORT}/api/stats\n`);
+  console.log(`\n🚛  Roadway Logistics Group LLC — Unified Platform`);
+  console.log(`   Frontend UI + Backend API live at: http://localhost:${PORT}`);
+  console.log(`   API Health Check: http://localhost:${PORT}/api/health`);
+  console.log(`   Submissions API:  http://localhost:${PORT}/api/submissions`);
+  console.log(`   Stats API:        http://localhost:${PORT}/api/stats\n`);
 });
