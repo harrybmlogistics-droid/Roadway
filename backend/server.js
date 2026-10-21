@@ -54,8 +54,8 @@ app.use(cors({
   credentials: true
 }));
 
-// Global rate limiter — 200 req / 15 min per IP
-app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 200, message: { error: 'Too many requests. Please slow down.' } }));
+// API rate limiter — 1000 req / 15 min per IP for API calls only
+app.use('/api', rateLimit({ windowMs: 15 * 60 * 1000, max: 1000, message: { error: 'Too many requests. Please slow down.' } }));
 
 // Stricter limiter for form submissions
 const formLimiter = rateLimit({ windowMs: 60 * 1000, max: 10, message: { error: 'Slow down — too many submissions.' } });

@@ -1325,58 +1325,78 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#EEF5FF] via-[#F8FBFF] to-[#E6F0FF] text-[#0F172A] font-sans selection:bg-[#0066FF] selection:text-white">
-      <style>{`
-        .glass-panel { background: linear-gradient(145deg, rgba(255,255,255,.88) 0%, rgba(248,251,255,.78) 100%); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,.95); box-shadow: 0 20px 50px -12px rgba(0,102,255,.08), inset 0 1px 0 0 #fff; }
-        .glass-card { background: linear-gradient(135deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.82) 100%); backdrop-filter: blur(16px); border: 1px solid rgba(226,238,255,.95); box-shadow: 0 10px 28px -6px rgba(0,102,255,.06), inset 0 1px 0 0 #fff; transition: all .22s cubic-bezier(.16,1,.3,1); }
-        .glass-card:hover { transform: translateY(-3px); border-color: rgba(0,102,255,.35); box-shadow: 0 18px 36px -8px rgba(0,102,255,.13), inset 0 1px 0 0 #fff; }
-      `}</style>
+    <div className="min-h-screen liquid-glass-bg text-[#0F172A] font-sans selection:bg-[#0066FF] selection:text-white relative overflow-x-hidden">
+      {/* Floating Fluid Ambient Orbs for Liquid Glass Refraction */}
+      <div className="fixed top-[-10%] left-[-8%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tr from-[#0066FF]/14 via-[#38BDF8]/12 to-transparent blur-[120px] pointer-events-none animate-pulse-slow z-0" />
+      <div className="fixed bottom-[-15%] right-[-10%] w-[65vw] h-[65vw] rounded-full bg-gradient-to-bl from-[#0052CC]/12 via-[#60A5FA]/14 to-transparent blur-[140px] pointer-events-none animate-pulse-slow-reverse z-0" />
+      <div className="fixed top-[45%] right-[10%] w-[42vw] h-[42vw] rounded-full bg-gradient-to-br from-[#0066FF]/08 via-[#93C5FD]/10 to-transparent blur-[110px] pointer-events-none animate-pulse-slow z-0" />
+      <div className="fixed top-[70%] left-[5%] w-[35vw] h-[35vw] rounded-full bg-gradient-to-tr from-[#38BDF8]/10 via-[#0066FF]/08 to-transparent blur-[100px] pointer-events-none animate-pulse-slow-reverse z-0" />
 
       {/* NAV */}
-      <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-2xl border-b border-blue-100/90 shadow-[0_4px_24px_rgba(0,102,255,0.05)]">
+      <header className="sticky top-0 z-40 bg-white/75 backdrop-blur-3xl border-b border-white/85 shadow-[0_6px_30px_rgba(0,102,255,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] transition-all">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <button onClick={() => nav('home')} className="flex items-center gap-3 group">
-              <div className="px-2.5 py-1.5 rounded-xl bg-[#E6F0FF] border border-blue-200"><span className="text-2xl font-black tracking-tighter text-[#0066FF]">RLG</span></div>
-              <div className="leading-tight">
+            <button onClick={() => nav('home')} className="flex items-center gap-3 group cursor-pointer">
+              <div className="px-3 py-1.5 rounded-2xl bg-gradient-to-tr from-[#0066FF] to-[#38BDF8] shadow-[0_8px_20px_rgba(0,102,255,0.35),inset_0_1px_1px_rgba(255,255,255,0.6)] border border-white/40 group-hover:scale-105 transition-transform">
+                <span className="text-2xl font-black tracking-tighter text-white drop-shadow-sm">RLG</span>
+              </div>
+              <div className="leading-tight text-left">
                 <span className="block font-extrabold text-sm sm:text-base text-[#0F172A] group-hover:text-[#0066FF] transition">Roadway Logistics</span>
-                <span className="block font-bold text-xs text-[#475569]">Group LLC</span>
+                <span className="block font-bold text-xs text-[#0066FF]/80">Group LLC</span>
               </div>
             </button>
 
-            <nav className="hidden xl:flex items-center gap-1">
+            <nav className="hidden xl:flex items-center gap-1.5 bg-white/60 backdrop-blur-xl border border-white/80 p-1.5 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_4px_16px_rgba(0,102,255,0.04)]">
               {NAV_ITEMS.map(item => (
-                <button key={item.id} onClick={() => nav(item.id)} className={`px-3.5 py-2 rounded-full text-xs font-semibold transition-all ${page === item.id ? 'bg-[#E6F0FF] text-[#0066FF] font-bold' : 'text-[#475569] hover:text-[#0F172A] hover:bg-slate-100/70'}`}>
+                <button
+                  key={item.id}
+                  onClick={() => nav(item.id)}
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                    page === item.id
+                      ? 'bg-gradient-to-r from-[#0066FF] to-[#0052CC] text-white shadow-[0_6px_18px_rgba(0,102,255,0.35),inset_0_1px_1px_rgba(255,255,255,0.4)]'
+                      : 'text-[#334155] hover:text-[#0066FF] hover:bg-white/80'
+                  }`}
+                >
                   {item.label}
                 </button>
               ))}
             </nav>
 
             <div className="hidden md:flex items-center gap-2.5">
-              <button onClick={() => nav('website')} className="px-4 py-2 rounded-full text-xs font-semibold text-[#0F172A] bg-white border border-blue-200/90 shadow-sm flex items-center gap-1.5 transition hover:bg-[#F0F7FF]">
+              <button onClick={() => nav('website')} className="px-4 py-2.5 rounded-full text-xs font-bold liquid-btn-secondary flex items-center gap-1.5 cursor-pointer">
                 <Globe className="w-3.5 h-3.5 text-[#0066FF]" />Website
               </button>
-              <a href={COMPANY.phoneHref} className="px-4 py-2 rounded-full text-xs font-semibold text-[#0F172A] bg-white border border-blue-200/90 shadow-sm flex items-center gap-1.5 transition hover:bg-[#F0F7FF]">
+              <a href={COMPANY.phoneHref} className="px-4 py-2.5 rounded-full text-xs font-bold liquid-btn-secondary flex items-center gap-1.5">
                 <Phone className="w-3.5 h-3.5 text-[#0066FF]" />Call
               </a>
-              <button onClick={() => nav('get-started')} className="px-5 py-2.5 rounded-full text-xs font-bold text-white bg-[#0066FF] hover:bg-[#0052CC] shadow-[0_6px_20px_rgba(0,102,255,0.3)] transition">
+              <button onClick={() => nav('get-started')} className="px-5 py-2.5 rounded-full text-xs font-bold liquid-btn-primary flex items-center gap-1.5 cursor-pointer">
                 Get Started
               </button>
             </div>
 
             <div className="flex xl:hidden items-center gap-2">
-              <button onClick={() => nav('get-started')} className="px-4 py-2 rounded-full text-xs font-bold text-white bg-[#0066FF]">Get Started</button>
-              <button onClick={() => setMobileOpen(o => !o)} className="p-2 rounded-xl bg-white border border-blue-100">
+              <button onClick={() => nav('get-started')} className="px-4 py-2 rounded-full text-xs font-bold liquid-btn-primary">Get Started</button>
+              <button onClick={() => setMobileOpen(o => !o)} className="p-2 rounded-2xl bg-white/80 backdrop-blur-lg border border-white shadow-sm text-[#0F172A]">
                 {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
         </div>
         {mobileOpen && (
-          <div className="xl:hidden bg-white/95 backdrop-blur-xl border-b border-blue-100 px-4 py-4">
+          <div className="xl:hidden bg-white/90 backdrop-blur-2xl border-b border-white px-4 py-4 shadow-xl">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {NAV_ITEMS.map(item => (
-                <button key={item.id} onClick={() => nav(item.id)} className={`px-3.5 py-2.5 rounded-xl text-xs font-bold text-left ${page === item.id ? 'bg-[#0066FF] text-white' : 'bg-[#F8FBFF] text-[#0F172A]'}`}>{item.label}</button>
+                <button
+                  key={item.id}
+                  onClick={() => nav(item.id)}
+                  className={`px-3.5 py-2.5 rounded-xl text-xs font-bold text-left transition ${
+                    page === item.id
+                      ? 'bg-[#0066FF] text-white shadow-md'
+                      : 'bg-white/80 text-[#0F172A] border border-blue-50 hover:border-blue-200'
+                  }`}
+                >
+                  {item.label}
+                </button>
               ))}
             </div>
           </div>
@@ -1460,9 +1480,9 @@ export default function App() {
 
       {/* Service Detail Modal */}
       {selService && !selService._applyJob && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 border border-blue-100 shadow-2xl space-y-5 relative my-8">
-            <button onClick={() => setSelService(null)} className="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200"><X className="w-5 h-5" /></button>
+        <div className="fixed inset-0 z-50 bg-[#0F172A]/40 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white/92 backdrop-blur-3xl rounded-3xl max-w-2xl w-full p-6 sm:p-8 border border-white/95 shadow-[0_30px_90px_rgba(0,102,255,0.25),inset_0_1px_2px_rgba(255,255,255,1)] space-y-5 relative my-8">
+            <button onClick={() => setSelService(null)} className="absolute top-5 right-5 p-2 rounded-full bg-slate-100/80 hover:bg-slate-200/80 text-[#0F172A] transition cursor-pointer"><X className="w-5 h-5" /></button>
             <div className="flex items-center gap-4">
               <ServiceIcon type={selService.icon} />
               <div>
@@ -1470,24 +1490,24 @@ export default function App() {
                 <p className="text-sm font-bold text-[#0066FF]">{selService.price}</p>
               </div>
             </div>
-            <p className="text-sm text-[#475569] leading-relaxed">{selService.desc}</p>
+            <p className="text-sm text-[#334155] leading-relaxed">{selService.desc}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 rounded-2xl bg-[#F8FBFF] border border-blue-100 space-y-2">
-                <h4 className="text-xs font-bold uppercase text-[#0066FF]">Scope to Discuss</h4>
-                <ul className="space-y-1.5 text-xs">
+              <div className="p-4 rounded-2xl bg-white/70 backdrop-blur-lg border border-blue-100/80 space-y-2 shadow-sm">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0066FF]">Scope to Discuss</h4>
+                <ul className="space-y-1.5 text-xs text-[#334155]">
                   {selService.scope?.map(s => <li key={s} className="flex gap-2 items-start"><CheckCircle2 className="w-3.5 h-3.5 text-[#0066FF] shrink-0 mt-0.5" />{s}</li>)}
                 </ul>
               </div>
-              <div className="p-4 rounded-2xl bg-emerald-50/50 border border-emerald-200 space-y-2">
-                <h4 className="text-xs font-bold uppercase text-emerald-800">Benefits</h4>
-                <ul className="space-y-1.5 text-xs">
+              <div className="p-4 rounded-2xl bg-emerald-50/70 backdrop-blur-lg border border-emerald-200/80 space-y-2 shadow-sm">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-800">Benefits</h4>
+                <ul className="space-y-1.5 text-xs text-emerald-900">
                   {selService.benefits?.map(b => <li key={b} className="flex gap-2 items-start"><Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />{b}</li>)}
                 </ul>
               </div>
             </div>
             <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-              <a href={COMPANY.phoneHref} className="px-5 py-2.5 rounded-full bg-slate-100 text-[#0F172A] text-xs font-bold flex items-center gap-2"><Phone className="w-4 h-4 text-[#0066FF]" />{COMPANY.phone}</a>
-              <button onClick={() => { setSelService(null); nav('get-started'); }} className="px-6 py-2.5 rounded-full bg-[#0066FF] text-white text-xs font-bold shadow-md hover:bg-[#0052CC]">Get Started →</button>
+              <a href={COMPANY.phoneHref} className="px-5 py-2.5 rounded-full liquid-btn-secondary text-xs font-bold flex items-center gap-2"><Phone className="w-4 h-4 text-[#0066FF]" />{COMPANY.phone}</a>
+              <button onClick={() => { setSelService(null); nav('get-started'); }} className="px-6 py-2.5 rounded-full liquid-btn-primary text-xs font-bold shadow-md cursor-pointer">Get Started →</button>
             </div>
           </div>
         </div>
@@ -1495,10 +1515,10 @@ export default function App() {
 
       {/* Job Application Modal */}
       {selService?._applyJob && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-blue-100 shadow-2xl space-y-4 relative">
-            <button onClick={() => setSelService(null)} className="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200"><X className="w-5 h-5" /></button>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF]">Driver Application · {selService._applyJob.equipment}</span>
+        <div className="fixed inset-0 z-50 bg-[#0F172A]/40 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white/92 backdrop-blur-3xl rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-white/95 shadow-[0_30px_90px_rgba(0,102,255,0.25),inset_0_1px_2px_rgba(255,255,255,1)] space-y-4 relative">
+            <button onClick={() => setSelService(null)} className="absolute top-5 right-5 p-2 rounded-full bg-slate-100/80 hover:bg-slate-200/80 text-[#0F172A] transition cursor-pointer"><X className="w-5 h-5" /></button>
+            <span className="text-xs font-bold px-3 py-1 rounded-full liquid-pill">Driver Application · {selService._applyJob.equipment}</span>
             <h3 className="text-2xl font-extrabold text-[#0F172A]">Apply for {selService._applyJob.title}</h3>
             <p className="text-xs font-bold text-emerald-700">{selService._applyJob.pay} · Est {selService._applyJob.est} · Home Time: {selService._applyJob.homeTime}</p>
             <form onSubmit={e => submitApplyJob(e, selService._applyJob)} className="space-y-3">
@@ -1509,11 +1529,11 @@ export default function App() {
               ].map(f => (
                 <div key={f.field}>
                   <label className="text-xs font-bold text-[#475569] block mb-1">{f.label}</label>
-                  <input type={f.type} required value={applyF.values[f.field]} onChange={applyF.set(f.field)} placeholder={f.ph} className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#0066FF]" />
+                  <input type={f.type} required value={applyF.values[f.field]} onChange={applyF.set(f.field)} placeholder={f.ph} className="liquid-input w-full px-3.5 py-2.5 rounded-xl text-xs focus:outline-none" />
                 </div>
               ))}
               <ResultAlert result={applyF.result} />
-              <Btn loading={applyF.loading} type="submit" className="w-full py-3 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold text-xs shadow-md transition">
+              <Btn loading={applyF.loading} type="submit" className="w-full py-3 rounded-full liquid-btn-primary font-bold text-xs shadow-md transition cursor-pointer">
                 {!applyF.loading && 'Submit Application →'}
               </Btn>
             </form>
@@ -1523,20 +1543,20 @@ export default function App() {
 
       {/* Glossary Modal */}
       {selTerm && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-blue-100 shadow-2xl space-y-4 relative">
-            <button onClick={() => setSelTerm(null)} className="absolute top-5 right-5 p-2 rounded-full bg-slate-100 hover:bg-slate-200"><X className="w-5 h-5" /></button>
-            <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF]">Roadway Knowledge Base</span>
+        <div className="fixed inset-0 z-50 bg-[#0F172A]/40 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white/92 backdrop-blur-3xl rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-white/95 shadow-[0_30px_90px_rgba(0,102,255,0.25),inset_0_1px_2px_rgba(255,255,255,1)] space-y-4 relative">
+            <button onClick={() => setSelTerm(null)} className="absolute top-5 right-5 p-2 rounded-full bg-slate-100/80 hover:bg-slate-200/80 text-[#0F172A] transition cursor-pointer"><X className="w-5 h-5" /></button>
+            <span className="text-xs font-bold px-3 py-1 rounded-full liquid-pill">Roadway Knowledge Base</span>
             <h3 className="text-2xl font-extrabold text-[#0F172A]">{selTerm.term}</h3>
             <p className="text-xs font-semibold text-[#0066FF]">{selTerm.short}</p>
             <p className="text-sm text-[#475569] leading-relaxed">{selTerm.definition}</p>
-            <div className="p-4 rounded-2xl bg-[#F0F7FF] border border-blue-200 text-xs text-[#0F172A]">
+            <div className="p-4 rounded-2xl bg-white/70 backdrop-blur-md border border-blue-200/80 text-xs text-[#0F172A]">
               <strong className="text-[#0066FF] block mb-1">Real-World Application:</strong>
               {selTerm.example}
             </div>
             <div className="flex justify-between items-center pt-2">
-              <button onClick={() => { setSelTerm(null); nav('contact'); }} className="text-xs font-bold text-[#0066FF] hover:underline">Have questions? Contact us →</button>
-              <button onClick={() => setSelTerm(null)} className="px-6 py-2.5 rounded-full bg-[#0066FF] text-white text-xs font-bold">Got It</button>
+              <button onClick={() => { setSelTerm(null); nav('contact'); }} className="text-xs font-bold text-[#0066FF] hover:underline cursor-pointer">Have questions? Contact us →</button>
+              <button onClick={() => setSelTerm(null)} className="px-6 py-2.5 rounded-full liquid-btn-primary text-white text-xs font-bold cursor-pointer">Got It</button>
             </div>
           </div>
         </div>
