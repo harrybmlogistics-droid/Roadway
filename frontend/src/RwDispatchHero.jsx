@@ -40,7 +40,8 @@ export default function RwDispatchHero() {
 
     function syncScale() {
       if (!el) return;
-      const s = Math.min(window.innerHeight / 800, window.innerWidth / 716);
+      const frameEl = el.querySelector('.frame') || el;
+      const s = Math.min(frameEl.clientHeight / 800, frameEl.clientWidth / 1280);
       el.style.setProperty('--s', s.toFixed(5));
     }
 

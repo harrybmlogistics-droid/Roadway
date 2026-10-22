@@ -64,8 +64,9 @@
 .rw-dispatch-hero .frame {
   position: relative;
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  height: 640px;
+  max-height: 80vh;
+  min-height: 460px;
   overflow: hidden;
   background: #0a0b0c;
 }
@@ -498,8 +499,8 @@
 /* RESPONSIVE — PHONE */
 @media (max-width: 609px) {
   .rw-dispatch-hero .frame {
-    height: 100vh;
-    height: 100dvh;
+    height: 580px;
+    min-height: 520px;
   }
 
   .rw-dispatch-hero {

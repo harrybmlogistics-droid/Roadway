@@ -1,9 +1,52 @@
 /* src/index.css — Roadway Logistics Group LLC */
 /* Theme: Liquid Glass (White & Electric Blue) */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   GLOBAL RESET & MODERN TYPOGRAPHY
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #0F172A;
+  background-color: #F8FAFD;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Remove default gray browser button borders and background */
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: inherit;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    LIQUID GLASS DESIGN SYSTEM (WHITE & BLUE)
@@ -29,6 +72,8 @@
     radial-gradient(at 80% 90%, rgba(99, 102, 241, 0.06) 0px, transparent 50%),
     linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 30%, #EBF3FF 60%, #F5F9FF 100%);
   background-attachment: fixed;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* Liquid Glass Primary Container / Section Panel */

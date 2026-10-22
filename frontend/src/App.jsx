@@ -1326,7 +1326,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen liquid-glass-bg text-[#0F172A] font-sans selection:bg-[#0066FF] selection:text-white relative overflow-x-hidden">
+    <div className="min-h-screen liquid-glass-bg text-[#0F172A] font-sans selection:bg-[#0066FF] selection:text-white relative overflow-x-hidden w-full max-w-full">
       {/* Floating Fluid Ambient Orbs for Liquid Glass Refraction */}
       <div className="fixed top-[-10%] left-[-8%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tr from-[#0066FF]/14 via-[#38BDF8]/12 to-transparent blur-[120px] pointer-events-none animate-pulse-slow z-0" />
       <div className="fixed bottom-[-15%] right-[-10%] w-[65vw] h-[65vw] rounded-full bg-gradient-to-bl from-[#0052CC]/12 via-[#60A5FA]/14 to-transparent blur-[140px] pointer-events-none animate-pulse-slow-reverse z-0" />
@@ -1337,7 +1337,7 @@ export default function App() {
       <header className="sticky top-0 z-40 bg-white/75 backdrop-blur-3xl border-b border-white/85 shadow-[0_6px_30px_rgba(0,102,255,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] transition-all">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <button onClick={() => nav('home')} className="flex items-center gap-3 group cursor-pointer">
+            <button onClick={() => nav('home')} className="flex items-center gap-3 group cursor-pointer border-0 outline-none bg-transparent p-0 shadow-none">
               <div className="px-3 py-1.5 rounded-2xl bg-gradient-to-tr from-[#0066FF] to-[#38BDF8] shadow-[0_8px_20px_rgba(0,102,255,0.35),inset_0_1px_1px_rgba(255,255,255,0.6)] border border-white/40 group-hover:scale-105 transition-transform">
                 <span className="text-2xl font-black tracking-tighter text-white drop-shadow-sm">RLG</span>
               </div>
@@ -1347,7 +1347,7 @@ export default function App() {
               </div>
             </button>
 
-            <nav className="hidden xl:flex items-center gap-1.5 bg-white/60 backdrop-blur-xl border border-white/80 p-1.5 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_4px_16px_rgba(0,102,255,0.04)]">
+            <nav className="hidden lg:flex items-center gap-1.5 bg-white/60 backdrop-blur-xl border border-white/80 p-1.5 rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_4px_16px_rgba(0,102,255,0.04)]">
               {NAV_ITEMS.map(item => (
                 <button
                   key={item.id}
@@ -1375,16 +1375,16 @@ export default function App() {
               </button>
             </div>
 
-            <div className="flex xl:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-2">
               <button onClick={() => nav('get-started')} className="px-4 py-2 rounded-full text-xs font-bold liquid-btn-primary">Get Started</button>
-              <button onClick={() => setMobileOpen(o => !o)} className="p-2 rounded-2xl bg-white/80 backdrop-blur-lg border border-white shadow-sm text-[#0F172A]">
+              <button onClick={() => setMobileOpen(o => !o)} className="p-2 rounded-2xl bg-white/80 backdrop-blur-lg border border-white shadow-sm text-[#0F172A] border-0 outline-none hover:bg-white transition cursor-pointer">
                 {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
             </div>
           </div>
         </div>
         {mobileOpen && (
-          <div className="xl:hidden bg-white/90 backdrop-blur-2xl border-b border-white px-4 py-4 shadow-xl">
+          <div className="lg:hidden bg-white/90 backdrop-blur-2xl border-b border-white px-4 py-4 shadow-xl">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {NAV_ITEMS.map(item => (
                 <button
