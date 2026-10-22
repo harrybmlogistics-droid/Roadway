@@ -32,6 +32,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
       imgSrc: ["'self'", "data:", "https:", "http:"],
+      mediaSrc: ["'self'", "https:", "data:", "blob:"],
       connectSrc: ["'self'", "*"]
     }
   },
@@ -112,25 +113,49 @@ app.post('/api/get-started',
   [
     body('fullName').trim().notEmpty().withMessage('Full name is required').isLength({ max: 100 }),
     body('phone').trim().notEmpty().withMessage('Phone is required').isLength({ max: 30 }),
-    body('serviceType').trim().notEmpty().withMessage('Service type is required').isLength({ max: 100 }),
-    body('mcNumber').optional().trim().isLength({ max: 20 })
+    body('serviceType').optional().trim().isLength({ max: 150 }),
+    body('plan').optional().trim().isLength({ max: 150 }),
+    body('email').optional().trim().isLength({ max: 100 }),
+    body('companyName').optional().trim().isLength({ max: 100 }),
+    body('truckType').optional().trim().isLength({ max: 100 }),
+    body('truckCount').optional().trim().isLength({ max: 50 }),
+    body('lanes').optional().trim().isLength({ max: 150 }),
+    body('mcNumber').optional().trim().isLength({ max: 50 }),
+    body('documents').optional().isArray()
   ],
   async (req, res) => {
     if (!validate(req, res)) return;
     try {
-      const { fullName, phone, mcNumber, serviceType } = req.body;
-      const id = db.insertSubmission('get-started', { fullName, phone, mcNumber, serviceType });
+      const payload = {
+        fullName: req.body.fullName,
+        phone: req.body.phone,
+        email: req.body.email || '',
+        companyName: req.body.companyName || '',
+        plan: req.body.plan || req.body.serviceType || 'Semi Truck Dispatch (5%)',
+        serviceType: req.body.serviceType || req.body.plan || 'Semi Truck Dispatch (5%)',
+        truckType: req.body.truckType || '',
+        truckCount: req.body.truckCount || '1',
+        lanes: req.body.lanes || 'All 48 States',
+        mcNumber: req.body.mcNumber || '',
+        documents: req.body.documents || []
+      };
+      const id = db.insertSubmission('get-started', payload);
 
-      mailer.sendGetStartedNotification({ fullName, phone, mcNumber, serviceType }).catch(console.error);
-      mailer.sendGetStartedAutoReply({ fullName, phone }).catch(console.error);
+      mailer.sendGetStartedNotification(payload).catch(console.error);
+      mailer.sendGetStartedAutoReply(payload).catch(console.error);
 
-      res.json({ success: true, id, message: `3-Day Free Trial activated for ${fullName}! Our dispatch team will call you shortly.` });
+      res.json({
+        success: true,
+        id,
+        message: `Carrier setup and documents received for ${payload.fullName}! CEO Awais and our dispatch onboarding team will review your files and call you at ${payload.phone} within 15 minutes.`
+      });
     } catch (err) {
       console.error('Get-started error:', err);
       res.status(500).json({ success: false, error: 'Server error. Please call us directly.' });
     }
   }
 );
+
 
 // ─── 3. DRIVER JOB APPLICATION ────────────────────────────────────────────────
 app.post('/api/apply-job',

@@ -7,6 +7,7 @@ import {
   Play, Pause, RotateCcw
 } from 'lucide-react';
 import { api } from './api';
+import RwDispatchHero from './RwDispatchHero';
 
 // ============================================================================
 // CONSTANTS
@@ -1405,8 +1406,23 @@ export default function App() {
 
       {/* MAIN */}
       <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
-        {page === 'home' && <div className="space-y-12"><Hero /><Services /><Pricing /><div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"><About /><DriverJobs /></div><div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"><Contact /><Resources /></div></div>}
-        {page === 'dispatch'     && <div className="space-y-10"><Hero /><Pricing /></div>}
+        {page === 'home' && (
+          <div className="space-y-12">
+            <Hero />
+            <RwDispatchHero />
+            <Services />
+            <Pricing />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"><About /><DriverJobs /></div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"><Contact /><Resources /></div>
+          </div>
+        )}
+        {page === 'dispatch' && (
+          <div className="space-y-10">
+            <Hero />
+            <RwDispatchHero />
+            <Pricing />
+          </div>
+        )}
         {page === 'services'     && <Services />}
         {page === 'pricing'      && <Pricing />}
         {page === 'about'        && <About />}

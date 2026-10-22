@@ -8,8 +8,9 @@
 const nodemailer = require('nodemailer');
 
 const COMPANY = process.env.COMPANY_NAME  || 'Roadway Logistics Group LLC';
-const PHONE   = process.env.COMPANY_PHONE || '+1-682-978-8641';
-const NOTIFY  = process.env.NOTIFY_EMAIL  || 'info@roadwaylogisticsgroup.com';
+const CEO     = process.env.COMPANY_CEO   || 'Awais';
+const PHONE   = process.env.COMPANY_PHONE || '(209) 202-3080';
+const NOTIFY  = process.env.NOTIFY_EMAIL  || 'Dispatch@roadwaylogisticsgroupllc.com';
 
 let _transporter = null;
 
