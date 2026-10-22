@@ -10,7 +10,7 @@ const nodemailer = require('nodemailer');
 const COMPANY = process.env.COMPANY_NAME  || 'Roadway Logistics Group LLC';
 const CEO     = process.env.COMPANY_CEO   || 'Awais';
 const PHONE   = process.env.COMPANY_PHONE || '(209) 202-3080';
-const NOTIFY  = process.env.NOTIFY_EMAIL  || 'Dispatch@roadwaylogisticsgroupllc.com';
+const NOTIFY  = process.env.NOTIFY_EMAIL  || 'Admin@roadwaylogisticsgroupllc.com';
 
 let _transporter = null;
 
@@ -50,7 +50,7 @@ async function getTransporter() {
 async function sendMail({ from, to, subject, html, text }) {
   const t    = await getTransporter();
   const info = await t.sendMail({
-    from: from || `"${COMPANY}" <noreply@roadwaylogisticsgroup.com>`,
+    from: from || `"${COMPANY}" <Admin@roadwaylogisticsgroupllc.com>`,
     to, subject, html, text
   });
   const preview = nodemailer.getTestMessageUrl(info);
@@ -69,8 +69,8 @@ const header = `
 const footer = `
   <hr style="border:none;border-top:1px solid #E6F0FF;margin:24px 0;"/>
   <p style="color:#64748B;font-size:11px;margin:0;">
-    ${COMPANY} · 8 The Green STE B, Dover, DE 19901<br/>
-    ${PHONE} · info@roadwaylogisticsgroup.com
+    ${COMPANY} · Gustine, California<br/>
+    ${PHONE} · Admin@roadwaylogisticsgroupllc.com
   </p>
 </div>`;
 

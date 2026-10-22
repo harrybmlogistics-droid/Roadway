@@ -15,10 +15,10 @@ import RwDispatchHero from './RwDispatchHero';
 
 const COMPANY = {
   name: 'Roadway Logistics Group LLC',
-  phone: '+1-682-978-8641',
-  phoneHref: 'tel:+16829788641',
-  email: 'info@roadwaylogisticsgroup.com',
-  address: '8 The Green STE B, Dover, DE 19901',
+  phone: '(209) 202-3080',
+  phoneHref: 'tel:+12092023080',
+  email: 'Admin@roadwaylogisticsgroupllc.com',
+  address: 'Gustine, California',
   stats: [
     { value: '5+', label: 'Years Experience' },
     { value: '80+', label: 'Carriers Served' },
@@ -37,7 +37,7 @@ const VISUALS = {
 };
 
 const CORE_SERVICES = [
-  { id:'dispatch',      title:'Dispatch Service',       price:'$250/wk semi · $350/wk box & hotshot', icon:'dispatch', desc:'24/7 load booking, aggressive rate negotiation, zero commission.',
+  { id:'dispatch',      title:'Dispatch Service',       price:'$500/wk semi · $800/wk box & hotshot (Negotiable %)', icon:'dispatch', desc:'24/7 load booking, aggressive rate negotiation, zero commission or negotiable percentage.',
     scope:['24/7 load finding & booking','Rate negotiation with brokers','Broker communication','Route planning','Paperwork & rate confirmations','Load tracking'],
     benefits:['Compare loads against costs','Access premium load boards','No forced dispatch','Keep 100% of rate increases'] },
   { id:'mc-authority',  title:'MC Authority Setup',     price:'$250 one-time',  icon:'mc',          desc:'USDOT, MC, BOC-3, UCR, permits & more.',
@@ -64,18 +64,18 @@ const CORE_SERVICES = [
 ];
 
 const MARKET_RATES = [
-  { type:'Dry Van',      rate:2.96, source:'DAT Sept 2026', fee:'$250/wk', gross:4600 },
-  { type:'Reefer',       rate:3.59, source:'DAT Sept 2026', fee:'$250/wk', gross:5400 },
-  { type:'Flatbed',      rate:3.55, source:'DAT Sept 2026', fee:'$250/wk', gross:5100 },
-  { type:'Step Deck',    rate:2.68, source:'Est. Feb 2026', fee:'$250/wk', gross:5200 },
-  { type:'Power Only',   rate:2.55, source:'Est. Feb 2026', fee:'$250/wk', gross:4200 },
-  { type:'Box Truck',    rate:2.85, source:'Est. Feb 2026', fee:'$350/wk', gross:4400 },
-  { type:'Hotshot',      rate:2.25, source:'Est. Feb 2026', fee:'$350/wk', gross:3400 },
-  { type:'Car Hauler',   rate:2.75, source:'Est. Feb 2026', fee:'$250/wk', gross:5200 },
-  { type:'Sprinter Van', rate:2.95, source:'Est. Feb 2026', fee:'$350/wk', gross:3800 },
-  { type:'Heavy Haul',   rate:3.40, source:'Est. Feb 2026', fee:'$250/wk', gross:6200 },
-  { type:'Drayage',      rate:3.10, source:'Est. Feb 2026', fee:'$250/wk', gross:4800 },
-  { type:'Straight Truck',rate:2.85,source:'Est. Feb 2026', fee:'$350/wk', gross:4400 }
+  { type:'Dry Van (Semi)',      rate:3.45, range:'$11k – $13k', source:'DAT Spot 2026', fee:'$500/wk', gross:12000 },
+  { type:'Reefer (Semi)',       rate:3.95, range:'$14k – $15k', source:'DAT Spot 2026', fee:'$500/wk', gross:14500 },
+  { type:'Flatbed (Semi)',      rate:3.85, range:'$12k – $14.5k', source:'DAT Spot 2026', fee:'$500/wk', gross:13200 },
+  { type:'Step Deck (Semi)',    rate:3.90, range:'$12.5k – $15k', source:'Est. 2026', fee:'$500/wk', gross:13500 },
+  { type:'Power Only (Semi)',   rate:3.25, range:'$10k – $12k', source:'Est. 2026', fee:'$500/wk', gross:11000 },
+  { type:'Car Hauler (Semi)',   rate:4.20, range:'$13k – $16k', source:'Est. 2026', fee:'$500/wk', gross:14500 },
+  { type:'Heavy Haul (Semi)',   rate:4.65, range:'$15k – $18.5k', source:'Est. 2026', fee:'$500/wk', gross:16500 },
+  { type:'Drayage (Semi)',      rate:3.50, range:'$10.5k – $13k', source:'Est. 2026', fee:'$500/wk', gross:11800 },
+  { type:'Box Truck',           rate:2.95, range:'$4k – $7k', source:'Expedited 2026', fee:'$800/wk', gross:5500 },
+  { type:'Hotshot (40ft)',      rate:2.85, range:'$6k – $8k', source:'Hotshot 2026', fee:'$800/wk', gross:7000 },
+  { type:'Sprinter Van',        rate:2.65, range:'$3.8k – $5.8k', source:'Expedited 2026', fee:'$800/wk', gross:4800 },
+  { type:'Straight Truck',      rate:3.05, range:'$4.5k – $7.2k', source:'Expedited 2026', fee:'$800/wk', gross:5800 }
 ];
 
 const DRIVER_JOBS = [
@@ -152,7 +152,7 @@ export default function App() {
   const [selTerm,       setSelTerm]       = useState(null);
   const [pricingTab,    setPricingTab]    = useState('semi');
   const [showCalc,      setShowCalc]      = useState(true);
-  const [calcGross,     setCalcGross]     = useState(6000);
+  const [calcGross,     setCalcGross]     = useState(12000);
   const [calcPct,       setCalcPct]       = useState(8);
   const [calcPlan,      setCalcPlan]      = useState('semi');
   const [jobEquip,      setJobEquip]      = useState('All');
@@ -172,7 +172,7 @@ export default function App() {
 
   // ─── FORMS ────────────────────────────────────────────────────────────────
   const contactF  = useForm({ fullName:'', email:'', phone:'', equipmentType:'Dry Van', mcNumber:'', reason:'Dispatch for my truck(s)', message:'' });
-  const startF    = useForm({ fullName:'', phone:'', mcNumber:'', serviceType:'Semi Truck — $250/week (Dry Van, Reefer, Flatbed)' });
+  const startF    = useForm({ fullName:'', phone:'', mcNumber:'', serviceType:'Semi Truck — $500/week (Dry Van, Reefer, Flatbed)' });
   const applyF    = useForm({ driverName:'', phone:'', cityState:'' });
   const websiteF  = useForm({ businessName:'', phone:'' });
   const hireF     = useForm({ companyName:'', phone:'', equipment:'Dry Van Driver' });
@@ -193,7 +193,7 @@ export default function App() {
 
   // ─── SAVINGS MATH ─────────────────────────────────────────────────────────
   const savings = useMemo(() => {
-    const flat   = calcPlan === 'semi' ? 250 : 350;
+    const flat   = calcPlan === 'semi' ? 500 : 800;
     const comm   = Math.round(calcGross * calcPct / 100);
     const saved  = comm - flat;
     return { flat, comm, keepComm: calcGross - comm, keepFlat: calcGross - flat, weeklySaved: saved, yearlySaved: saved * 52 };
@@ -454,11 +454,12 @@ export default function App() {
             <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#0066FF]">Dispatch Pricing</p>
           </div>
           <div className="space-y-1 text-xs text-[#0F172A]">
-            <div className="flex justify-between gap-3"><span className="text-[#475569]">Semi Truck:</span><span className="font-extrabold text-[#0066FF]">$250/wk</span></div>
-            <div className="flex justify-between gap-3"><span className="text-[#475569]">Box/Hotshot:</span><span className="font-extrabold text-[#0066FF]">$350/wk</span></div>
+            <div className="flex justify-between gap-3"><span className="text-[#475569]">Semi Truck:</span><span className="font-extrabold text-[#0066FF]">$500/wk</span></div>
+            <div className="flex justify-between gap-3"><span className="text-[#475569]">Box/Hotshot:</span><span className="font-extrabold text-[#0066FF]">$800/wk</span></div>
+            <div className="text-[10px] text-emerald-700 font-bold pt-0.5">Percentage is Negotiable</div>
           </div>
           <button onClick={() => onNav('pricing')} className="mt-2 text-[11px] font-bold text-[#0066FF] hover:underline flex items-center gap-1">
-            <span>Explore All 14 Rates</span><ArrowRight className="w-3 h-3" />
+            <span>Explore All 12 Spot Rates</span><ArrowRight className="w-3 h-3" />
           </button>
         </div>
 
@@ -533,7 +534,7 @@ export default function App() {
             We help <strong className="text-[#0F172A]">owner-operators</strong> and small fleets find better loads, reduce deadhead, and increase profits — with flat-rate dispatch, compliance, factoring, and driver support all in one place.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {['Flat Rate Dispatch ($250/$350/wk)','No Contracts — Cancel Anytime','24/7 Live Dispatch Support','All Equipment Types Covered'].map(t => (
+            {['Flat Rate Dispatch ($500/$800/wk)','Percentage is Negotiable','No Contracts — Cancel Anytime','24/7 Live Dispatch Support'].map(t => (
               <div key={t} className="flex items-center gap-2.5 text-sm font-medium text-[#0F172A]">
                 <div className="w-5 h-5 rounded-full bg-[#E6F0FF] text-[#0066FF] flex items-center justify-center shrink-0"><Check className="w-3.5 h-3.5 stroke-[3]" /></div>
                 <span>{t}</span>
@@ -630,13 +631,15 @@ export default function App() {
   const Pricing = () => (
     <section className="glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 space-y-8">
       <div className="space-y-3">
-        <div className="inline-flex px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">One Flat Rate. Unlimited Loads.</div>
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">
+          <span>Flat Rate or Negotiable % · Unlimited Loads</span>
+        </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Dispatch Pricing 2026</h2>
-        <p className="text-sm text-[#475569]">Flat weekly rate. <strong className="text-[#0F172A]">Unlimited loads.</strong> No commission, no contracts. Industry charges 5–10% per load — <strong className="text-[#0066FF]">we don't.</strong></p>
+        <p className="text-sm text-[#475569]">Flat weekly rate ($500/wk Semis · $800/wk Box & Hotshot) or <strong className="text-[#0066FF]">negotiable percentage</strong>. <strong className="text-[#0F172A]">Unlimited loads.</strong> No commission trap, no forced dispatch, no contracts.</p>
         <div className="inline-flex gap-2 p-1.5 rounded-full bg-[#E6F0FF]/90 border border-blue-200">
           {['semi','box'].map(tab => (
             <button key={tab} onClick={() => setPricingTab(tab)} className={`px-5 py-2 rounded-full text-xs font-bold transition ${pricingTab === tab ? 'bg-[#0066FF] text-white shadow-sm' : 'bg-white/80 text-[#0F172A]'}`}>
-              {tab === 'semi' ? 'Semi Trucks ($250/wk)' : 'Box Truck & Hotshot ($350/wk)'}
+              {tab === 'semi' ? 'Semi Trucks ($500/wk)' : 'Box Truck & Hotshot ($800/wk)'}
             </button>
           ))}
         </div>
@@ -644,10 +647,10 @@ export default function App() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {[
-          { tab:'semi', title:'Semi Truck Dispatch', sub:'Dry Van • Reefer • Flatbed • Step Deck • Power Only', price:'$250', badge:'Most Popular — 80% of Owner-Operators',
-            features:['Unlimited loads','No per-load commission','No setup fee','No contract — cancel anytime','3-day free trial (no card required)','Aggressive rate negotiation (15–20% above market)','24/7 dispatch & broker credit checks','Paperwork, carrier packets & rate confirmations'] },
-          { tab:'box', title:'Box Truck & Hotshot Dispatch', sub:'Box Truck • Hotshot (CDL & non-CDL) • Sprinter • Straight Truck', price:'$350', badge:'CDL & Non-CDL Expedited Desk',
-            features:['Unlimited loads','No per-load commission (vs 10–15% industry)','No setup fee','No contract — cancel anytime','3-day free trial (no card required)','LTL partial pairing & full-load negotiation','24/7 dispatch & broker credit vetting','Paperwork, carrier packets & rate confirmations'] }
+          { tab:'semi', title:'Semi Truck Dispatch', sub:'Dry Van • Reefer • Flatbed • Step Deck • Power Only', price:'$500', badge:'Most Popular — All Semi Trucks ($11k–$15k/wk Gross)',
+            features:['Unlimited loads (Dry Van $11k–$13k, Reefer $14k–$15k avg gross)','Flat $500/wk or Negotiable Percentage','No per-load commission lock-in','No setup fee & no forced dispatch','No contract — cancel anytime','3-day free trial (no card required)','Aggressive rate negotiation (15–20% above market)','24/7 dispatch & broker credit checks','Paperwork, carrier packets & rate confirmations'] },
+          { tab:'box', title:'Box Truck & Hotshot Dispatch', sub:'Box Truck • Hotshot (CDL & non-CDL) • Sprinter • Straight Truck', price:'$800', badge:'Expedited & Hotshot Desk ($4k–$8k/wk Gross)',
+            features:['Unlimited loads (Box Truck $4k–$7k, Hotshot $6k–$8k avg gross)','Flat $800/wk or Negotiable Percentage','No per-load commission lock-in','No setup fee & no forced dispatch','No contract — cancel anytime','3-day free trial (no card required)','LTL partial pairing & full-load negotiation','24/7 dispatch & broker credit vetting','Paperwork, carrier packets & rate confirmations'] }
         ].map(card => (
           <div key={card.tab} className={`glass-card rounded-3xl p-7 border-2 flex flex-col justify-between transition ${pricingTab === card.tab ? 'border-[#0066FF] shadow-[0_16px_40px_rgba(0,102,255,0.12)]' : 'border-white opacity-90'}`}>
             <div className="space-y-5">
@@ -662,6 +665,7 @@ export default function App() {
               <div className="flex items-baseline gap-1.5 pt-2 border-t border-slate-100">
                 <span className="text-5xl font-extrabold text-[#0066FF]">{card.price}</span>
                 <span className="text-base font-bold text-[#475569]">/ week</span>
+                <span className="text-xs font-semibold text-emerald-700 ml-2">or Negotiable %</span>
               </div>
               <ul className="space-y-2.5 text-xs text-[#0F172A]">
                 {card.features.map(f => (
@@ -686,7 +690,7 @@ export default function App() {
           <div className="space-y-2">
             <span className="text-xs font-bold uppercase text-[#0066FF]">The Math Doesn't Lie</span>
             <h3 className="text-2xl font-extrabold text-[#0F172A]">Compare and Save</h3>
-            <p className="text-sm font-semibold text-[#475569]">Save up to <strong className="text-[#0066FF]">$230/week</strong> on a $6K gross vs. 8% commission dispatchers.</p>
+            <p className="text-sm font-semibold text-[#475569]">Save up to <strong className="text-[#0066FF]">$460/week ($23,920/year)</strong> on a $12K Dry Van gross vs. 8% commission dispatchers.</p>
           </div>
           <button onClick={() => setShowCalc(c => !c)} className="px-6 py-3 rounded-full bg-[#0066FF] text-white text-xs font-bold shadow-md flex items-center gap-2 transition self-start md:self-auto">
             {showCalc ? 'Hide Calculator' : 'Open Calculator'} <ArrowRight className="w-4 h-4" />
@@ -698,11 +702,14 @@ export default function App() {
         <div className="space-y-6">
           <div className="bg-[#F0F7FF] rounded-3xl p-6 sm:p-8 border border-blue-200 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-4">
-              <h4 className="text-xl font-extrabold text-[#0F172A]">Weekly & Annual Savings Calculator</h4>
+              <div className="flex items-center justify-between">
+                <h4 className="text-xl font-extrabold text-[#0F172A]">Weekly & Annual Savings Calculator</h4>
+                <span className="text-[11px] font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded-full">Percentage Negotiable</span>
+              </div>
               <div className="flex gap-2">
                 {['semi','box'].map(p => (
                   <button key={p} onClick={() => setCalcPlan(p)} className={`px-4 py-2 rounded-xl text-xs font-bold transition ${calcPlan === p ? 'bg-[#0066FF] text-white' : 'bg-white text-slate-700'}`}>
-                    {p === 'semi' ? 'Semi ($250/wk)' : 'Box/Hotshot ($350/wk)'}
+                    {p === 'semi' ? 'Semi ($500/wk)' : 'Box/Hotshot ($800/wk)'}
                   </button>
                 ))}
               </div>
@@ -710,7 +717,12 @@ export default function App() {
                 <div className="flex justify-between text-xs font-bold">
                   <span>Weekly Gross Revenue:</span><span className="text-[#0066FF]">${calcGross.toLocaleString()}/wk</span>
                 </div>
-                <input type="range" min={3500} max={11000} step={250} value={calcGross} onChange={e => setCalcGross(Number(e.target.value))} className="w-full accent-[#0066FF]" />
+                <input type="range" min={4000} max={20000} step={500} value={calcGross} onChange={e => setCalcGross(Number(e.target.value))} className="w-full accent-[#0066FF]" />
+                <div className="flex justify-between text-[10px] text-slate-400">
+                  <span>$4,000/wk</span>
+                  <span>$12,000/wk (Dry Van Avg)</span>
+                  <span>$20,000/wk</span>
+                </div>
               </div>
               <div className="bg-white p-4 rounded-2xl border border-blue-100 space-y-2">
                 <div className="flex justify-between text-xs font-bold">
@@ -735,36 +747,47 @@ export default function App() {
                   <p className="text-xs text-sky-400 font-bold uppercase">Annual Net Savings (52 Weeks)</p>
                   <p className="text-3xl font-extrabold text-emerald-400 mt-0.5">+${Math.max(0, savings.yearlySaved).toLocaleString()}/yr</p>
                 </div>
-                <span className="text-xs bg-white/10 px-3 py-1.5 rounded-full font-bold">+${Math.max(0, savings.weeklySaved)}/wk</span>
+                <span className="text-xs bg-white/10 px-3 py-1.5 rounded-full font-bold">+${Math.max(0, savings.weeklySaved).toLocaleString()}/wk</span>
               </div>
             </div>
           </div>
 
           {/* Market Rates Table */}
           <div className="bg-white rounded-2xl border border-blue-100 overflow-hidden shadow-sm">
-            <div className="p-4 bg-[#F8FBFF] border-b border-blue-100">
-              <h4 className="font-extrabold text-sm text-[#0F172A]">2026 Market Spot Rates — All Equipment Types</h4>
-              <p className="text-xs text-[#64748B]">DAT Truckload Market Report (Sept 2026) & RLG Estimates</p>
+            <div className="p-4 bg-[#F8FBFF] border-b border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h4 className="font-extrabold text-sm text-[#0F172A]">2026 Market Spot Rates — All Equipment Types</h4>
+                <p className="text-xs text-[#64748B]">Updated DAT Sept 2026 benchmarks & actual Roadway Logistics averages</p>
+              </div>
+              <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold self-start">
+                Percentage is Negotiable
+              </span>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead><tr className="border-b border-slate-200 text-[#64748B] bg-slate-50/70">
                   <th className="py-3 px-4 font-bold">Equipment</th>
                   <th className="py-3 px-4 font-bold">Spot Rate</th>
-                  <th className="py-3 px-4 font-bold">Source</th>
-                  <th className="py-3 px-4 font-bold">Our Fee</th>
+                  <th className="py-3 px-4 font-bold">Weekly Gross Range</th>
                   <th className="py-3 px-4 font-bold">Avg Gross/Wk</th>
+                  <th className="py-3 px-4 font-bold">Our Flat Fee</th>
+                  <th className="py-3 px-4 font-bold text-emerald-700">Net Take-Home/Wk</th>
                 </tr></thead>
                 <tbody className="divide-y divide-slate-100">
-                  {MARKET_RATES.map(r => (
-                    <tr key={r.type} className="hover:bg-blue-50/40">
-                      <td className="py-3 px-4 font-bold text-[#0F172A]">{r.type}</td>
-                      <td className="py-3 px-4 font-bold text-[#0066FF]">${r.rate.toFixed(2)}/mi</td>
-                      <td className="py-3 px-4 text-[#64748B]">{r.source}</td>
-                      <td className="py-3 px-4 font-semibold text-[#0F172A]">{r.fee}</td>
-                      <td className="py-3 px-4 font-bold text-emerald-700">${r.gross.toLocaleString()}</td>
-                    </tr>
-                  ))}
+                  {MARKET_RATES.map(r => {
+                    const flatFee = r.fee.includes('500') ? 500 : 800;
+                    const netKeep = r.gross - flatFee;
+                    return (
+                      <tr key={r.type} className="hover:bg-blue-50/40 transition-colors">
+                        <td className="py-3 px-4 font-bold text-[#0F172A]">{r.type}</td>
+                        <td className="py-3 px-4 font-bold text-[#0066FF]">${r.rate.toFixed(2)}/mi</td>
+                        <td className="py-3 px-4 font-semibold text-slate-700">{r.range}</td>
+                        <td className="py-3 px-4 font-bold text-emerald-700">${r.gross.toLocaleString()}/wk</td>
+                        <td className="py-3 px-4 font-extrabold text-[#0066FF]">{r.fee}</td>
+                        <td className="py-3 px-4 font-extrabold text-[#0F172A]">${netKeep.toLocaleString()}/wk</td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -778,7 +801,7 @@ export default function App() {
     <section className="glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 space-y-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-7 space-y-5">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">Est. 2021 · Registered LLC in Delaware</span>
+          <span className="inline-block px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">Est. 2021 · Registered LLC · Gustine, CA</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">About Roadway Logistics Group LLC</h2>
           <p className="text-sm text-[#475569] leading-relaxed">We are a <strong className="text-[#0F172A]">professional dispatch</strong> and trucking business services company built by industry experts for owner-operators and small fleets — providing reliable, transparent, and affordable solutions.</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-3">
@@ -981,7 +1004,7 @@ export default function App() {
               <div className="absolute inset-0 opacity-25" style={{ backgroundImage:'linear-gradient(to right,#93C5FD 1px,transparent 1px),linear-gradient(to bottom,#93C5FD 1px,transparent 1px)', backgroundSize:'22px 22px' }} />
               <div className="relative z-10 flex flex-col items-center">
                 <div className="w-9 h-9 rounded-full bg-[#0066FF] text-white flex items-center justify-center shadow-lg animate-bounce"><MapPin className="w-5 h-5" /></div>
-                <span className="mt-1 px-2.5 py-0.5 rounded-full bg-white/95 text-[10px] font-bold text-[#0F172A] shadow">Dover, DE 19901 HQ</span>
+                <span className="mt-1 px-2.5 py-0.5 rounded-full bg-white/95 text-[10px] font-bold text-[#0F172A] shadow">Gustine, CA Operations Desk</span>
               </div>
             </div>
           </div>
@@ -993,7 +1016,7 @@ export default function App() {
             {[
               { label:'Full Name *', field:'fullName', type:'text', ph:'Your full name', req: true },
               { label:'Email Address *', field:'email', type:'email', ph:'you@company.com', req: true },
-              { label:'Phone Number *', field:'phone', type:'tel', ph:'+1-682-000-0000', req: true },
+              { label:'Phone Number *', field:'phone', type:'tel', ph:'(209) 202-3080', req: true },
               { label:'MC Number (Optional)', field:'mcNumber', type:'text', ph:'MC-#######', req: false }
             ].map(f => (
               <div key={f.field}>
@@ -1136,12 +1159,12 @@ export default function App() {
       <div className="space-y-2">
         <span className="inline-block px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">3-Day Free Trial · No Card Required · No Contract</span>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Get Started</h2>
-        <p className="text-sm text-[#475569]">Flat $250/wk Semis · $350/wk Box & Hotshot. Our dispatch team will call you right away to complete onboarding.</p>
+        <p className="text-sm text-[#475569]">Flat $500/wk Semis · $800/wk Box & Hotshot (Percentage is Negotiable). Our dispatch team will call you right away to complete onboarding.</p>
       </div>
       <form onSubmit={submitGetStarted} className="space-y-4">
         {[
           { label:'Full Name *', field:'fullName', type:'text', ph:'Your full name', req: true },
-          { label:'Phone Number *', field:'phone', type:'tel', ph:'+1-682-000-0000', req: true },
+          { label:'Phone Number *', field:'phone', type:'tel', ph:'(209) 202-3080', req: true },
           { label:'MC or USDOT # (Optional)', field:'mcNumber', type:'text', ph:'MC-#######', req: false }
         ].map(f => (
           <div key={f.field}>
@@ -1152,7 +1175,7 @@ export default function App() {
         <div>
           <label className="text-xs font-bold text-[#475569] block mb-1">Service Needed *</label>
           <select value={startF.values.serviceType} onChange={startF.set('serviceType')} className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm">
-            {['Semi Truck — $250/week (Dry Van, Reefer, Flatbed)','Box Truck / Hotshot — $350/week','MC Authority Setup — $250 one-time','Driver Hiring — $500 per placement','Website Design — $274 one-time','Compliance / Accounting / Logbook'].map(o => <option key={o}>{o}</option>)}
+            {['Semi Truck — $500/week (Dry Van, Reefer, Flatbed)','Box Truck / Hotshot — $800/week','Negotiable Percentage Dispatch Option','MC Authority Setup — $250 one-time','Driver Hiring — $500 per placement','Website Design — $274 one-time','Compliance / Accounting / Logbook'].map(o => <option key={o}>{o}</option>)}
           </select>
         </div>
         <ResultAlert result={startF.result} />
@@ -1182,7 +1205,7 @@ export default function App() {
       <form onSubmit={submitWebsite} className="space-y-4">
         {[
           { label:'Business / Company Name *', field:'businessName', type:'text', ph:'Your Company LLC', req: true },
-          { label:'Phone Number *', field:'phone', type:'tel', ph:'+1-682-000-0000', req: true }
+          { label:'Phone Number *', field:'phone', type:'tel', ph:'(209) 202-3080', req: true }
         ].map(f => (
           <div key={f.field}>
             <label className="text-xs font-bold text-[#475569] block mb-1">{f.label}</label>
@@ -1440,7 +1463,7 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/65 to-[#0F172A]/75" />
           <div className="relative z-10 max-w-2xl mx-auto px-6 py-12 space-y-4">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Ready to Grow Your Trucking Business?</h2>
-            <p className="text-sm font-medium text-[#1E293B]">Flat $250/wk Semis · $350/wk Box & Hotshot. Start your 3-day free trial today.</p>
+            <p className="text-sm font-medium text-[#1E293B]">Flat $500/wk Semis · $800/wk Box & Hotshot (Percentage is Negotiable). Start your 3-day free trial today.</p>
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
               <a href={COMPANY.phoneHref} className="px-7 py-3.5 rounded-full bg-[#0066FF] text-white font-bold text-sm shadow-[0_8px_24px_rgba(0,102,255,0.35)] flex items-center gap-2 transition hover:bg-[#0052CC]">
                 <Phone className="w-4 h-4" />{COMPANY.phone}
@@ -1540,7 +1563,7 @@ export default function App() {
             <form onSubmit={e => submitApplyJob(e, selService._applyJob)} className="space-y-3">
               {[
                 { label:'Driver Full Name *', field:'driverName', type:'text', ph:'Your full name' },
-                { label:'Mobile Phone *', field:'phone', type:'tel', ph:'+1-682-000-0000' },
+                { label:'Mobile Phone *', field:'phone', type:'tel', ph:'(209) 202-3080' },
                 { label:'City & State *', field:'cityState', type:'text', ph:'Dallas, TX' }
               ].map(f => (
                 <div key={f.field}>
