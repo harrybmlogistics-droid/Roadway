@@ -6,23 +6,23 @@
 [![Express](https://img.shields.io/badge/Express-4.19.2-black.svg)](https://expressjs.com/)
 [![License](https://img.shields.io/badge/License-Proprietary-red.svg)]()
 
-> Professional Dispatch & Trucking Business Services — Delaware Registered LLC (Est. 2021).  
+> Professional Dispatch & Trucking Business Services — Gustine, California (Est. 2021).  
 > A high-performance full-stack web application designed for motor carriers, owner-operators, and fleet managers.
 
 ---
 
 ## 🌟 Key Features
 
-* **Equipment Rates (14 Profiles):** Transparent flat pricing ($250/wk semi vs $350/wk box & hotshot) for Dry Van, Reefer, Flatbed, Stepdeck, Lowboy, RGN, Conestoga, Tanker, Hotshot 40ft, Box Truck 26ft, Power Only, Auto Hauler, Dump Truck, and Sprinter.
+* **Equipment Rates (14 Profiles):** Transparent flat pricing ($500/wk semi vs $800/wk box & hotshot, with negotiable percentage options) for Dry Van, Reefer, Flatbed, Stepdeck, Lowboy, RGN, Conestoga, Tanker, Hotshot 40ft, Box Truck 26ft, Power Only, Auto Hauler, Dump Truck, and Sprinter.
 * **8 Core Services Grid:**
-  1. 24/7 Dispatch Service ($250/wk or $350/wk flat fee)
+  1. 24/7 Dispatch Service ($500/wk semi · $800/wk box & hotshot · Negotiable %)
   2. MC Authority Setup ($250 one-time)
   3. Factoring Assistance ($120 one-time)
   4. Compliance & Permits (From $150/mo)
   5. Accounting & Bookkeeping (From $150)
   6. Driver Hiring ($500 solo / $750 team placement)
   7. Logbook Management (From $100)
-  8. Trailer Rental ($700–$1,200/mo)
+  8. Trailer Rental ($800/week)
 * **Website Design Package ($274):** Turnkey 5-page custom trucking website booking modal with fast 48h turnaround.
 * **Interactive Calculators:**
   * **Commission vs Flat Rate Savings:** Real-time calculation of weekly & yearly profit preserved vs 5%–10% broker dispatch commission.
@@ -134,6 +134,6 @@ Deploying on Hostinger takes under 5 minutes:
 ## 📧 Support & Contact
 
 * **Company:** Roadway Logistics Group LLC
-* **Phone:** +1-682-978-8641
-* **Email:** info@roadwaylogisticsgroup.com
-* **Address:** 8 The Green STE B, Dover, DE 19901
+* **Phone:** (209) 202-3080
+* **Email:** Admin@roadwaylogisticsgroupllc.com
+* **Address:** Gustine, California
