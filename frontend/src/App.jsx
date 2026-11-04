@@ -10,6 +10,7 @@ import {
 import { api } from './api';
 import RwDispatchHero from './RwDispatchHero';
 import KvFreightShowcase from './KvFreightShowcase';
+import RoadwayTruckTable from './RoadwayTruckTable';
 
 // ============================================================================
 // CONSTANTS
@@ -535,10 +536,8 @@ export default function App() {
       {/* Service Quick Bar */}
       <div className="mt-10 pt-8 border-t border-blue-100/80">
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-          {[...CORE_SERVICES.slice(0,7).map(s => ({ id: s.id, label: s.title.replace(' Service','').replace(' Setup','').replace(' Assistance','').replace(' Management',''), icon: s.icon })),
-            { id:'web', label:'Web Design', icon:'web' }
-          ].map(item => (
-            <button key={item.id} onClick={() => item.id === 'web' ? nav('website') : setSelService(CORE_SERVICES.find(s => s.id === item.id))}
+          {CORE_SERVICES.map(s => ({ id: s.id, label: s.title.replace(' Service','').replace(' Setup','').replace(' Assistance','').replace(' Management',''), icon: s.icon })).map(item => (
+            <button key={item.id} onClick={() => setSelService(CORE_SERVICES.find(s => s.id === item.id))}
               className="glass-card rounded-2xl p-3 flex flex-col items-center gap-2 text-center group cursor-pointer">
               <ServiceIcon type={item.icon} size="sm" />
               <span className="text-[11px] font-bold text-[#0F172A] group-hover:text-[#0066FF] transition leading-tight">{item.label}</span>
@@ -652,114 +651,15 @@ export default function App() {
         ))}
       </div>
 
-      {/* BOTTOM WEBSITE DESIGN BANNER */}
-      <div className="glass-card rounded-3xl p-4 sm:p-6 relative overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          {/* Left Info Section */}
-          <div className="lg:col-span-5 flex items-start sm:items-center gap-4 sm:gap-5 z-10">
-            {/* Globe Icon Circle */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full icon-box flex items-center justify-center shrink-0 ring-8 ring-blue-100">
-              <Globe className="w-9 h-9 sm:w-10 sm:h-10 text-white" />
-            </div>
-
-            <div>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">Website Design</h3>
-              <p className="text-blue-600 font-bold text-sm sm:text-base mt-0.5">
-                $274 one-time • 1st Year Hosting Included
-              </p>
-              <p className="text-slate-600 text-xs sm:text-sm mt-1.5 leading-snug max-w-md">
-                Custom, SEO-optimized, mobile-responsive websites — trucking, construction, healthcare, and any industry.
-              </p>
-              <button
-                onClick={() =>
-                  setSelService({
-                    id: 'website',
-                    title: 'Website Design',
-                    price: '$274 one-time • 1st Year Hosting Included',
-                    icon: 'web',
-                    desc: 'Custom 5-page responsive website, domain setup, SSL security, quote request forms, and SEO optimization tailored for carriers and brokers.',
-                    scope: [
-                      'Custom 5-page responsive website',
-                      'Domain setup & SSL security',
-                      'Quote request & contact forms',
-                      'SEO optimization for carriers & brokers',
-                      '1st year hosting included',
-                      'Delivered in 5–7 business days'
-                    ],
-                    benefits: [
-                      'Professional online presence',
-                      'Mobile & desktop ready',
-                      'Google Analytics & Maps included',
-                      'Convert broker & shipper visits'
-                    ],
-                    _isWebsite: true
-                  })
-                }
-                className="mt-3 inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-full shadow transition cursor-pointer"
-              >
-                <span>Get Your Website</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Middle Truck Highway Image Banner */}
-          <div className="lg:col-span-4 h-36 sm:h-40 rounded-2xl overflow-hidden relative hidden sm:block">
-            <img
-              src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=900&q=80"
-              alt="Fleet Highway"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 via-transparent to-transparent"></div>
-          </div>
-
-          {/* Right Browser Mockup Widget */}
-          <div className="lg:col-span-3 z-10">
-            <div className="bg-white/95 border border-blue-100 rounded-2xl p-4 shadow-md text-center">
-              {/* Mac Window Dots */}
-              <div className="flex items-center gap-1.5 mb-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-                <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-              </div>
-              <div className="text-slate-800 font-extrabold text-base mb-3">yourFleet.com</div>
-              <button
-                onClick={() =>
-                  setSelService({
-                    id: 'website-quote',
-                    title: 'Website Design Quote',
-                    price: '$274 one-time',
-                    icon: 'web',
-                    desc: 'Launch your custom trucking company website in 5 business days with hosting and domain configuration included.',
-                    scope: [
-                      'Custom 5-page responsive website',
-                      'Domain & hosting configuration',
-                      'Quote request & lead forms',
-                      'Mobile & desktop responsive layout',
-                      'Google Analytics & SEO setup',
-                      '5-day turnaround'
-                    ],
-                    benefits: [
-                      'All-in $274 one-time pricing',
-                      '1st year hosting free',
-                      'Zero monthly design fees',
-                      'Ready for brokers & shippers'
-                    ],
-                    _isWebsite: true
-                  })
-                }
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm py-2.5 rounded-full shadow-md shadow-blue-500/20 transition mb-2.5 cursor-pointer"
-              >
-                Get a Quote
-              </button>
-              <div className="inline-flex items-center justify-center gap-1.5 text-[11px] font-semibold text-blue-600">
-                <MonitorSmartphone className="w-3.5 h-3.5" />
-                <span>Mobile • Desktop Ready</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* INTERACTIVE ROADWAY BRANDED TRUCK SELECTION TABLE */}
+      <RoadwayTruckTable
+        marketRates={MARKET_RATES}
+        truckRowConfig={truckRowConfig}
+        setTruckMode={setTruckMode}
+        setTruckPct={setTruckPct}
+        setAllTrucksMode={setAllTrucksMode}
+        chooseTruckPlan={chooseTruckPlan}
+      />
     </section>
   );
 
@@ -1021,114 +921,15 @@ export default function App() {
             </div>
           </div>
 
-          {/* Market Rates Table with Per-Truck Flat vs Percentage Selector */}
-          <div className="bg-white rounded-2xl border border-blue-100 overflow-hidden shadow-sm">
-            <div className="p-4 bg-[#F8FBFF] border-b border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <h4 className="font-extrabold text-sm text-[#0F172A]">2026 Market Spot Rates — Select Flat Rate or Percentage for Each Truck</h4>
-                <p className="text-xs text-[#64748B]">Click Flat Weekly ($500/$800) or Flat Percentage (4%–10%) on any truck row below to customize your plan</p>
-              </div>
-              <div className="flex items-center gap-2 self-start sm:self-auto">
-                <span className="text-[11px] font-bold text-[#475569]">Set All Trucks:</span>
-                <button
-                  type="button"
-                  onClick={() => setAllTrucksMode('flat')}
-                  className="px-3 py-1.5 rounded-full bg-[#0066FF] text-white text-[11px] font-bold hover:bg-[#0052CC] transition cursor-pointer"
-                >
-                  All Flat Weekly
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setAllTrucksMode('pct')}
-                  className="px-3 py-1.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold hover:bg-emerald-700 transition cursor-pointer"
-                >
-                  All Flat Percentage (%)
-                </button>
-              </div>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead><tr className="border-b border-slate-200 text-[#64748B] bg-slate-50/70">
-                  <th className="py-3 px-4 font-bold">Equipment Type</th>
-                  <th className="py-3 px-4 font-bold">Spot Rate</th>
-                  <th className="py-3 px-4 font-bold">Avg Gross/Wk</th>
-                  <th className="py-3 px-4 font-bold">Select Plan (Flat vs %)</th>
-                  <th className="py-3 px-4 font-bold">Truck % Option</th>
-                  <th className="py-3 px-4 font-bold">Selected Fee/Wk</th>
-                  <th className="py-3 px-4 font-bold text-emerald-700">Net Take-Home/Wk</th>
-                  <th className="py-3 px-4 font-bold text-right">Action</th>
-                </tr></thead>
-                <tbody className="divide-y divide-slate-100">
-                  {MARKET_RATES.map(r => {
-                    const rowCfg = truckRowConfig[r.type] || { mode: 'flat', pct: r.pct };
-                    const isFlat = rowCfg.mode === 'flat';
-                    const activePct = rowCfg.pct ?? r.pct;
-                    const pctFee = Math.round(r.gross * activePct / 100);
-                    const appliedFee = isFlat ? r.flatFee : pctFee;
-                    const netKeep = r.gross - appliedFee;
-                    return (
-                      <tr key={r.type} className="hover:bg-blue-50/40 transition-colors">
-                        <td className="py-3 px-4">
-                          <span className="font-bold text-[#0F172A] block">{r.type}</span>
-                          <span className="text-[10px] text-[#64748B]">{r.range}/wk</span>
-                        </td>
-                        <td className="py-3 px-4 font-bold text-[#0066FF]">${r.rate.toFixed(2)}/mi</td>
-                        <td className="py-3 px-4 font-bold text-emerald-700">${r.gross.toLocaleString()}/wk</td>
-                        <td className="py-3 px-4">
-                          <div className="inline-flex rounded-xl p-0.5 bg-slate-100 border border-slate-200">
-                            <button
-                              type="button"
-                              onClick={() => setTruckMode(r.type, 'flat')}
-                              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
-                                isFlat ? 'bg-[#0066FF] text-white shadow-xs' : 'text-[#475569] hover:text-[#0F172A]'
-                              }`}
-                            >
-                              Flat ${r.flatFee}/wk
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => setTruckMode(r.type, 'pct')}
-                              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
-                                !isFlat ? 'bg-emerald-600 text-white shadow-xs' : 'text-[#475569] hover:text-[#0F172A]'
-                              }`}
-                            >
-                              {activePct}% Pct
-                            </button>
-                          </div>
-                        </td>
-                        <td className="py-3 px-4">
-                          <select
-                            value={activePct}
-                            onChange={e => setTruckPct(r.type, Number(e.target.value))}
-                            className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-xs font-bold text-[#0F172A] focus:outline-none focus:border-[#0066FF] cursor-pointer"
-                          >
-                            {r.pctOptions.map(opt => (
-                              <option key={opt} value={opt}>
-                                {opt}% Flat ({opt === r.pct ? 'Standard' : 'Option'})
-                              </option>
-                            ))}
-                          </select>
-                        </td>
-                        <td className="py-3 px-4 font-extrabold text-[#0066FF]">
-                          {isFlat ? `$${r.flatFee}/wk (Flat)` : `${activePct}% ($${pctFee.toLocaleString()}/wk)`}
-                        </td>
-                        <td className="py-3 px-4 font-extrabold text-[#0F172A]">${netKeep.toLocaleString()}/wk</td>
-                        <td className="py-3 px-4 text-right">
-                          <button
-                            type="button"
-                            onClick={() => chooseTruckPlan(r.type, rowCfg.mode, activePct)}
-                            className="px-3 py-1.5 rounded-full bg-[#E6F0FF] hover:bg-[#0066FF] text-[#0066FF] hover:text-white font-bold text-[11px] transition cursor-pointer"
-                          >
-                            Select {isFlat ? `$${r.flatFee}` : `${activePct}%`} →
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          {/* Interactive Fleet Table with Roadway Logo on Every Truck */}
+          <RoadwayTruckTable
+            marketRates={MARKET_RATES}
+            truckRowConfig={truckRowConfig}
+            setTruckMode={setTruckMode}
+            setTruckPct={setTruckPct}
+            setAllTrucksMode={setAllTrucksMode}
+            chooseTruckPlan={chooseTruckPlan}
+          />
         </div>
       )}
     </section>
@@ -1502,7 +1303,6 @@ export default function App() {
       'MC Authority Setup — $250 one-time',
       'Factoring Assistance — $120 one-time',
       'Driver Hiring — $500 per placement',
-      'Website Design — $274 one-time',
       'Compliance / Accounting / Logbook'
     ];
 
@@ -1868,9 +1668,6 @@ export default function App() {
             </nav>
 
             <div className="hidden md:flex items-center gap-2.5">
-              <button onClick={() => nav('website')} className="px-4 py-2.5 rounded-full text-xs font-bold liquid-btn-secondary flex items-center gap-1.5 cursor-pointer">
-                <Globe className="w-3.5 h-3.5 text-[#0066FF]" />Website
-              </button>
               <a href={COMPANY.phoneHref} className="px-4 py-2.5 rounded-full text-xs font-bold liquid-btn-secondary flex items-center gap-1.5">
                 <Phone className="w-3.5 h-3.5 text-[#0066FF]" />Call
               </a>
@@ -1979,7 +1776,7 @@ export default function App() {
               </div>
             </div>
             {[
-              { title:'Services', links:[...CORE_SERVICES.slice(0,5).map(s => ({ label: s.title, page: 'services' })), { label:'Website Design – $274', page:'website' }] },
+              { title:'Services', links:CORE_SERVICES.slice(0,6).map(s => ({ label: s.title, page: 'services' })) },
               { title:'Dispatch', links:['Dry Van','Reefer','Flatbed','Box Truck','Hotshot','Step Deck'].map(d => ({ label:`${d} Dispatch`, page:'pricing' })) },
               { title:'Company',  links:[{label:'About Us',page:'about'},{label:'Pricing',page:'pricing'},{label:'Driver Jobs',page:'driver-jobs'},{label:'Hire Drivers',page:'hire-drivers'},{label:'Resources',page:'resources'},{label:'Contact',page:'contact'},{label:'⚙ Admin',page:'admin'}] }
             ].map(col => (
