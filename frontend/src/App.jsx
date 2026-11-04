@@ -447,76 +447,7 @@ export default function App() {
         />
 
         {/* Cinematic Vignette Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/70 via-transparent to-[#0F172A]/20 pointer-events-none" />
-
-        {/* Top Left: Dispatch Pricing Card */}
-        <div className="absolute top-3 left-3 sm:top-5 sm:left-5 bg-white/90 backdrop-blur-xl border border-white/80 rounded-2xl p-3.5 sm:p-4 shadow-[0_12px_32px_rgba(0,102,255,0.18)] z-10 max-w-[200px] sm:max-w-xs pointer-events-auto">
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#0066FF] animate-pulse" />
-            <p className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#0066FF]">Dispatch Pricing</p>
-          </div>
-          <div className="space-y-1 text-xs text-[#0F172A]">
-            <div className="flex justify-between gap-3"><span className="text-[#475569]">Semi Truck:</span><span className="font-extrabold text-[#0066FF]">$500/wk</span></div>
-            <div className="flex justify-between gap-3"><span className="text-[#475569]">Box/Hotshot:</span><span className="font-extrabold text-[#0066FF]">$800/wk</span></div>
-            <div className="text-[10px] text-emerald-700 font-bold pt-0.5">Percentage is Negotiable</div>
-          </div>
-          <button onClick={() => onNav('pricing')} className="mt-2 text-[11px] font-bold text-[#0066FF] hover:underline flex items-center gap-1">
-            <span>Explore All 12 Spot Rates</span><ArrowRight className="w-3 h-3" />
-          </button>
-        </div>
-
-        {/* Top Right: Status / Frame Counter Badge */}
-        <div className="absolute top-3 right-3 sm:top-5 sm:right-5 flex items-center gap-2 z-10 pointer-events-auto">
-          <div className="bg-slate-900/80 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-[11px] font-mono text-white flex items-center gap-2 shadow-lg">
-            <span className="inline-block w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-            <span>Cinematic Scroll</span>
-            <span className="text-blue-300 font-bold">#{String(currentFrame).padStart(3, '0')}</span>
-          </div>
-        </div>
-
-        {/* Bottom Center / Controls: Interactive Scrubber & Autoplay */}
-        <div className="absolute bottom-3 inset-x-3 sm:bottom-4 sm:inset-x-5 z-10 pointer-events-auto">
-          <div className="bg-slate-900/85 backdrop-blur-xl border border-white/20 rounded-2xl p-2.5 sm:p-3 shadow-2xl flex flex-col gap-2">
-            {/* Controls Bar */}
-            <div className="flex items-center justify-between gap-3 text-xs text-white">
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0066FF] hover:bg-blue-600 text-white flex items-center justify-center transition shadow-md shrink-0 cursor-pointer"
-                  title={isPlaying ? 'Pause Animation' : 'Auto-Play Cinematic Sequence'}
-                >
-                  {isPlaying ? <Pause className="w-3.5 h-3.5 fill-current" /> : <Play className="w-3.5 h-3.5 fill-current ml-0.5" />}
-                </button>
-                <div className="leading-tight">
-                  <span className="text-[11px] sm:text-xs font-bold text-white block">
-                    {isPlaying ? 'Auto-Playing Sequence' : 'Scroll Page or Drag to Scrub'}
-                  </span>
-                  <span className="text-[10px] text-slate-300 font-mono">
-                    Frame {currentFrame} / {TOTAL_HERO_FRAMES} ({progressPct}%)
-                  </span>
-                </div>
-              </div>
-
-              <div className="hidden sm:flex items-center gap-2 text-[11px] text-slate-300">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>240 Frames Loaded ({loadedCount})</span>
-              </div>
-            </div>
-
-            {/* Scrub Track */}
-            <div className="relative flex items-center">
-              <input
-                type="range"
-                min="1"
-                max={TOTAL_HERO_FRAMES}
-                value={currentFrame}
-                onChange={handleScrub}
-                className="w-full h-1.5 bg-white/20 rounded-lg appearance-none cursor-pointer accent-[#0066FF] hover:bg-white/30 transition"
-              />
-            </div>
-          </div>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/40 via-transparent to-[#0F172A]/10 pointer-events-none" />
       </div>
     );
   };
