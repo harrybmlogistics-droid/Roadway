@@ -313,9 +313,18 @@ const candidates = [
 const staticDir = candidates.find(p => fs.existsSync(p));
 if (staticDir) {
   console.log(`📦 Serving static frontend from: ${staticDir}`);
-  app.use(express.static(staticDir));
+  app.use(express.static(staticDir, {
+    etag: false,
+    lastModified: false,
+    setHeaders: (res) => {
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+    }
+  }));
   app.get('*', (req, res, next) => {
     if (req.path.startsWith('/api')) return next();
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     res.sendFile(path.join(staticDir, 'index.html'));
   });
 }

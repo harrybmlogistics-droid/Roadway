@@ -39,9 +39,9 @@ const VISUALS = {
 };
 
 const CORE_SERVICES = [
-  { id:'dispatch',      title:'Dispatch Service',       price:'$500/wk semi – $800/wk box & hotshot', icon:'dispatch', popular: true,  img:'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', desc:'24/7 load booking, aggressive rate negotiation, zero commission or negotiable percentage.',
+  { id:'dispatch',      title:'Dispatch Service',       price:'$500–$800/wk Flat or 5%–9% by Truck', icon:'dispatch', popular: true,  img:'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', desc:'24/7 load booking, aggressive rate negotiation, choose Flat Weekly Rate or Flat Percentage by truck type.',
     scope:['24/7 load finding & booking','Rate negotiation with brokers','Broker communication','Route planning','Paperwork & rate confirmations','Load tracking'],
-    benefits:['Compare loads against costs','Access premium load boards','No forced dispatch','Keep 100% of rate increases'] },
+    benefits:['Choose Flat Weekly or Flat % by truck','Access premium load boards','No forced dispatch','Keep 100% of rate increases'] },
   { id:'mc-authority',  title:'MC Authority Setup',     price:'$250 one-time',  icon:'mc',          popular: false, img:'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=80', desc:'USDOT, MC, BOC-3, UCR, permits & more.',
     scope:['USDOT registration','MC authority application','BOC-3 filing','UCR registration','State permits guidance','Insurance consultation'],
     benefits:['Start hauling legally','Identify missing info early','Expert guidance','No delays'] },
@@ -66,18 +66,18 @@ const CORE_SERVICES = [
 ];
 
 const MARKET_RATES = [
-  { type:'Dry Van (Semi)',      rate:3.45, range:'$11k – $13k', source:'DAT Spot 2026', fee:'$500/wk', gross:12000 },
-  { type:'Reefer (Semi)',       rate:3.95, range:'$14k – $15k', source:'DAT Spot 2026', fee:'$500/wk', gross:14500 },
-  { type:'Flatbed (Semi)',      rate:3.85, range:'$12k – $14.5k', source:'DAT Spot 2026', fee:'$500/wk', gross:13200 },
-  { type:'Step Deck (Semi)',    rate:3.90, range:'$12.5k – $15k', source:'Est. 2026', fee:'$500/wk', gross:13500 },
-  { type:'Power Only (Semi)',   rate:3.25, range:'$10k – $12k', source:'Est. 2026', fee:'$500/wk', gross:11000 },
-  { type:'Car Hauler (Semi)',   rate:4.20, range:'$13k – $16k', source:'Est. 2026', fee:'$500/wk', gross:14500 },
-  { type:'Heavy Haul (Semi)',   rate:4.65, range:'$15k – $18.5k', source:'Est. 2026', fee:'$500/wk', gross:16500 },
-  { type:'Drayage (Semi)',      rate:3.50, range:'$10.5k – $13k', source:'Est. 2026', fee:'$500/wk', gross:11800 },
-  { type:'Box Truck',           rate:2.95, range:'$4k – $7k', source:'Expedited 2026', fee:'$800/wk', gross:5500 },
-  { type:'Hotshot (40ft)',      rate:2.85, range:'$6k – $8k', source:'Hotshot 2026', fee:'$800/wk', gross:7000 },
-  { type:'Sprinter Van',        rate:2.65, range:'$3.8k – $5.8k', source:'Expedited 2026', fee:'$800/wk', gross:4800 },
-  { type:'Straight Truck',      rate:3.05, range:'$4.5k – $7.2k', source:'Expedited 2026', fee:'$800/wk', gross:5800 }
+  { type:'Dry Van (Semi)',      category:'semi', rate:3.45, range:'$11k – $13k',   source:'DAT Spot 2026', fee:'$500/wk', flatFee:500, pct:5, pctOptions:[4,5,6],   gross:12000 },
+  { type:'Reefer (Semi)',       category:'semi', rate:3.95, range:'$14k – $15k',   source:'DAT Spot 2026', fee:'$500/wk', flatFee:500, pct:5, pctOptions:[4,5,6],   gross:14500 },
+  { type:'Flatbed (Semi)',      category:'semi', rate:3.85, range:'$12k – $14.5k', source:'DAT Spot 2026', fee:'$500/wk', flatFee:500, pct:6, pctOptions:[5,6,7],   gross:13200 },
+  { type:'Step Deck (Semi)',    category:'semi', rate:3.90, range:'$12.5k – $15k', source:'Est. 2026',     fee:'$500/wk', flatFee:500, pct:6, pctOptions:[5,6,7],   gross:13500 },
+  { type:'Power Only (Semi)',   category:'semi', rate:3.25, range:'$10k – $12k',   source:'Est. 2026',     fee:'$500/wk', flatFee:500, pct:5, pctOptions:[4,5,6],   gross:11000 },
+  { type:'Car Hauler (Semi)',   category:'semi', rate:4.20, range:'$13k – $16k',   source:'Est. 2026',     fee:'$500/wk', flatFee:500, pct:7, pctOptions:[6,7,8],   gross:14500 },
+  { type:'Heavy Haul (Semi)',   category:'semi', rate:4.65, range:'$15k – $18.5k', source:'Est. 2026',     fee:'$500/wk', flatFee:500, pct:8, pctOptions:[7,8,9],   gross:16500 },
+  { type:'Drayage (Semi)',      category:'semi', rate:3.50, range:'$10.5k – $13k', source:'Est. 2026',     fee:'$500/wk', flatFee:500, pct:6, pctOptions:[5,6,7],   gross:11800 },
+  { type:'Box Truck',           category:'box',  rate:2.95, range:'$4k – $7k',     source:'Expedited 2026',fee:'$800/wk', flatFee:800, pct:8, pctOptions:[7,8,9,10],gross:5500 },
+  { type:'Hotshot (40ft)',      category:'box',  rate:2.85, range:'$6k – $8k',     source:'Hotshot 2026',  fee:'$800/wk', flatFee:800, pct:8, pctOptions:[7,8,9,10],gross:7000 },
+  { type:'Sprinter Van',        category:'box',  rate:2.65, range:'$3.8k – $5.8k', source:'Expedited 2026',fee:'$800/wk', flatFee:800, pct:9, pctOptions:[8,9,10],  gross:4800 },
+  { type:'Straight Truck',      category:'box',  rate:3.05, range:'$4.5k – $7.2k', source:'Expedited 2026',fee:'$800/wk', flatFee:800, pct:8, pctOptions:[7,8,9,10],gross:5800 }
 ];
 
 const DRIVER_JOBS = [
@@ -139,9 +139,10 @@ function useForm(initial) {
   const [result,  setResult]  = useState(null); // { ok: bool, message: string }
 
   const set = (field) => (e) => setValues(v => ({ ...v, [field]: e.target.value }));
+  const setValue = (field, val) => setValues(v => ({ ...v, [field]: val }));
   const reset = () => { setValues(initial); setResult(null); };
 
-  return { values, set, loading, setLoading, result, setResult, reset };
+  return { values, set, setValue, loading, setLoading, result, setResult, reset };
 }
 
 // ============================================================================
@@ -153,6 +154,13 @@ export default function App() {
   const [selService,    setSelService]    = useState(null);
   const [selTerm,       setSelTerm]       = useState(null);
   const [pricingTab,    setPricingTab]    = useState('semi');
+  const [cardPlanMode,  setCardPlanMode]  = useState({ semi: 'flat', box: 'flat' });
+  const [cardTruckType, setCardTruckType] = useState({ semi: 'Dry Van (Semi)', box: 'Box Truck' });
+  const [truckRowConfig, setTruckRowConfig] = useState(() =>
+    Object.fromEntries(MARKET_RATES.map(r => [r.type, { mode: 'flat', pct: r.pct }]))
+  );
+  const [startTruck,    setStartTruck]    = useState('Dry Van (Semi)');
+  const [startBilling,  setStartBilling]  = useState('flat');
   const [showCalc,      setShowCalc]      = useState(true);
   const [calcGross,     setCalcGross]     = useState(12000);
   const [calcPct,       setCalcPct]       = useState(8);
@@ -174,7 +182,7 @@ export default function App() {
 
   // ─── FORMS ────────────────────────────────────────────────────────────────
   const contactF  = useForm({ fullName:'', email:'', phone:'', equipmentType:'Dry Van', mcNumber:'', reason:'Dispatch for my truck(s)', message:'' });
-  const startF    = useForm({ fullName:'', phone:'', mcNumber:'', serviceType:'Semi Truck — $500/week (Dry Van, Reefer, Flatbed)' });
+  const startF    = useForm({ fullName:'', phone:'', mcNumber:'', serviceType:'Dry Van (Semi) — Flat Rate ($500/wk)' });
   const applyF    = useForm({ driverName:'', phone:'', cityState:'' });
   const websiteF  = useForm({ businessName:'', phone:'' });
   const hireF     = useForm({ companyName:'', phone:'', equipment:'Dry Van Driver' });
@@ -183,6 +191,42 @@ export default function App() {
     setPage(p); setMobileOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+
+  const setTruckMode = useCallback((truckType, mode) => {
+    setTruckRowConfig(prev => ({
+      ...prev,
+      [truckType]: { ...(prev[truckType] || { pct: 5 }), mode }
+    }));
+  }, []);
+
+  const setTruckPct = useCallback((truckType, pct) => {
+    setTruckRowConfig(prev => ({
+      ...prev,
+      [truckType]: { ...(prev[truckType] || { mode: 'pct' }), mode: 'pct', pct: Number(pct) }
+    }));
+  }, []);
+
+  const setAllTrucksMode = useCallback((mode) => {
+    setTruckRowConfig(prev =>
+      Object.fromEntries(MARKET_RATES.map(r => [r.type, { mode, pct: prev[r.type]?.pct ?? r.pct }]))
+    );
+  }, []);
+
+  const chooseTruckPlan = useCallback((truckType, mode, pctVal) => {
+    const truckObj = MARKET_RATES.find(r => r.type === truckType) || MARKET_RATES[0];
+    const chosenPct = pctVal ?? truckRowConfig[truckType]?.pct ?? truckObj.pct;
+    setStartTruck(truckObj.type);
+    setStartBilling(mode);
+    setTruckRowConfig(prev => ({
+      ...prev,
+      [truckObj.type]: { mode, pct: chosenPct }
+    }));
+    const label = mode === 'flat'
+      ? `${truckObj.type} — Flat Rate ($${truckObj.flatFee}/wk)`
+      : `${truckObj.type} — Flat Percentage (${chosenPct}% per load)`;
+    startF.setValue('serviceType', label);
+    nav('get-started');
+  }, [truckRowConfig, startF, nav]);
 
   const showToast = useCallback((title, desc, ok = true) => {
     setToast({ title, desc, ok });
@@ -467,7 +511,7 @@ export default function App() {
             We help <strong className="text-[#0F172A]">owner-operators</strong> and small fleets find better loads, reduce deadhead, and increase profits — with flat-rate dispatch, compliance, factoring, and driver support all in one place.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {['Flat Rate Dispatch ($500/$800/wk)','Percentage is Negotiable','No Contracts — Cancel Anytime','24/7 Live Dispatch Support'].map(t => (
+            {['Flat Rate Dispatch ($500/$800/wk)','Flat Percentage by Truck (5%–9%)','No Contracts — Cancel Anytime','24/7 Live Dispatch Support'].map(t => (
               <div key={t} className="flex items-center gap-2.5 text-sm font-medium text-[#0F172A]">
                 <div className="w-5 h-5 rounded-full bg-[#E6F0FF] text-[#0066FF] flex items-center justify-center shrink-0"><Check className="w-3.5 h-3.5 stroke-[3]" /></div>
                 <span>{t}</span>
@@ -723,14 +767,14 @@ export default function App() {
     <section className="glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 space-y-8">
       <div className="space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">
-          <span>Flat Rate or Negotiable % · Unlimited Loads</span>
+          <span>Select Flat Weekly Rate or Truck-Specific Flat Percentage (%) · Unlimited Loads</span>
         </div>
         <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Dispatch Pricing 2026</h2>
-        <p className="text-sm text-[#475569]">Flat weekly rate ($500/wk Semis · $800/wk Box & Hotshot) or <strong className="text-[#0066FF]">negotiable percentage</strong>. <strong className="text-[#0F172A]">Unlimited loads.</strong> No commission trap, no forced dispatch, no contracts.</p>
-        <div className="inline-flex gap-2 p-1.5 rounded-full bg-[#E6F0FF]/90 border border-blue-200">
+        <p className="text-sm text-[#475569]">Every truck can choose between a <strong className="text-[#0F172A]">Flat Weekly Rate</strong> ($500/wk Semis · $800/wk Box &amp; Hotshot) or a <strong className="text-[#0066FF]">Flat Percentage (%) tailored to your truck type</strong> (5%–9% depending on equipment). <strong className="text-[#0F172A]">Unlimited loads.</strong> No forced dispatch, no contracts.</p>
+        <div className="inline-flex gap-2 p-1.5 rounded-full bg-[#E6F0FF]/90 border border-blue-200 flex-wrap">
           {['semi','box'].map(tab => (
-            <button key={tab} onClick={() => setPricingTab(tab)} className={`px-5 py-2 rounded-full text-xs font-bold transition ${pricingTab === tab ? 'bg-[#0066FF] text-white shadow-sm' : 'bg-white/80 text-[#0F172A]'}`}>
-              {tab === 'semi' ? 'Semi Trucks ($500/wk)' : 'Box Truck & Hotshot ($800/wk)'}
+            <button key={tab} onClick={() => setPricingTab(tab)} className={`px-5 py-2 rounded-full text-xs font-bold transition cursor-pointer ${pricingTab === tab ? 'bg-[#0066FF] text-white shadow-sm' : 'bg-white/80 text-[#0F172A]'}`}>
+              {tab === 'semi' ? 'Semi Trucks ($500/wk or 5%–8%)' : 'Box Truck & Hotshot ($800/wk or 8%–9%)'}
             </button>
           ))}
         </div>
@@ -738,39 +782,168 @@ export default function App() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {[
-          { tab:'semi', title:'Semi Truck Dispatch', sub:'Dry Van • Reefer • Flatbed • Step Deck • Power Only', price:'$500', badge:'Most Popular — All Semi Trucks ($11k–$15k/wk Gross)',
-            features:['Unlimited loads (Dry Van $11k–$13k, Reefer $14k–$15k avg gross)','Flat $500/wk or Negotiable Percentage','No per-load commission lock-in','No setup fee & no forced dispatch','No contract — cancel anytime','3-day free trial (no card required)','Aggressive rate negotiation (15–20% above market)','24/7 dispatch & broker credit checks','Paperwork, carrier packets & rate confirmations'] },
-          { tab:'box', title:'Box Truck & Hotshot Dispatch', sub:'Box Truck • Hotshot (CDL & non-CDL) • Sprinter • Straight Truck', price:'$800', badge:'Expedited & Hotshot Desk ($4k–$8k/wk Gross)',
-            features:['Unlimited loads (Box Truck $4k–$7k, Hotshot $6k–$8k avg gross)','Flat $800/wk or Negotiable Percentage','No per-load commission lock-in','No setup fee & no forced dispatch','No contract — cancel anytime','3-day free trial (no card required)','LTL partial pairing & full-load negotiation','24/7 dispatch & broker credit vetting','Paperwork, carrier packets & rate confirmations'] }
-        ].map(card => (
-          <div key={card.tab} className={`glass-card rounded-3xl p-7 border-2 flex flex-col justify-between transition ${pricingTab === card.tab ? 'border-[#0066FF] shadow-[0_16px_40px_rgba(0,102,255,0.12)]' : 'border-white opacity-90'}`}>
-            <div className="space-y-5">
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <span className="text-[11px] font-bold uppercase px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF]">{card.badge}</span>
-                <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">3-Day Free Trial</span>
-              </div>
-              <div>
-                <h3 className="text-2xl font-extrabold text-[#0F172A]">{card.title}</h3>
-                <p className="text-xs text-[#64748B] mt-1">{card.sub}</p>
-              </div>
-              <div className="flex items-baseline gap-1.5 pt-2 border-t border-slate-100">
-                <span className="text-5xl font-extrabold text-[#0066FF]">{card.price}</span>
-                <span className="text-base font-bold text-[#475569]">/ week</span>
-                <span className="text-xs font-semibold text-emerald-700 ml-2">or Negotiable %</span>
-              </div>
-              <ul className="space-y-2.5 text-xs text-[#0F172A]">
-                {card.features.map(f => (
-                  <li key={f} className="flex items-center gap-2.5">
-                    <Check className="w-4 h-4 text-[#0066FF] stroke-[2.5] shrink-0" /><span>{f}</span>
+          { tab:'semi', title:'Semi Truck Dispatch', sub:'Dry Van • Reefer • Flatbed • Step Deck • Power Only • Car Hauler • Heavy Haul • Drayage', flatPrice:500, badge:'Most Popular — All Semi Trucks ($11k–$18.5k/wk Gross)',
+            baseFeatures:['Unlimited loads (Dry Van $11k–$13k, Reefer $14k–$15k avg gross)','No setup fee & no forced dispatch','No contract — cancel anytime','3-day free trial (no card required)','Aggressive rate negotiation (15–20% above market)','24/7 dispatch & broker credit checks','Paperwork, carrier packets & rate confirmations'] },
+          { tab:'box', title:'Box Truck & Hotshot Dispatch', sub:'Box Truck • Hotshot (CDL & non-CDL) • Sprinter Van • Straight Truck', flatPrice:800, badge:'Expedited & Hotshot Desk ($4k–$8k/wk Gross)',
+            baseFeatures:['Unlimited loads (Box Truck $4k–$7k, Hotshot $6k–$8k avg gross)','No setup fee & no forced dispatch','No contract — cancel anytime','3-day free trial (no card required)','LTL partial pairing & full-load negotiation','24/7 dispatch & broker credit vetting','Paperwork, carrier packets & rate confirmations'] }
+        ].map(card => {
+          const trucksForCard = MARKET_RATES.filter(r => r.category === card.tab);
+          const selectedTruckName = cardTruckType[card.tab] || trucksForCard[0].type;
+          const activeTruck = trucksForCard.find(r => r.type === selectedTruckName) || trucksForCard[0];
+          const mode = cardPlanMode[card.tab] || 'flat';
+          const activePct = truckRowConfig[activeTruck.type]?.pct ?? activeTruck.pct;
+          const estPctWeekly = Math.round(activeTruck.gross * activePct / 100);
+          const selectedWeeklyFee = mode === 'flat' ? card.flatPrice : estPctWeekly;
+          const estNetTakeHome = activeTruck.gross - selectedWeeklyFee;
+
+          return (
+            <div key={card.tab} className={`glass-card rounded-3xl p-7 border-2 flex flex-col justify-between transition ${pricingTab === card.tab ? 'border-[#0066FF] shadow-[0_16px_40px_rgba(0,102,255,0.12)]' : 'border-white opacity-95'}`}>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between flex-wrap gap-2">
+                  <span className="text-[11px] font-bold uppercase px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF]">{card.badge}</span>
+                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">3-Day Free Trial</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-extrabold text-[#0F172A]">{card.title}</h3>
+                  <p className="text-xs text-[#64748B] mt-1">{card.sub}</p>
+                </div>
+
+                {/* Step 1: Select Truck Type */}
+                <div className="p-3.5 rounded-2xl bg-[#F8FBFF] border border-blue-100 space-y-2.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <label className="text-[11px] font-extrabold uppercase tracking-wider text-[#0F172A]">1. Select Your Truck Equipment:</label>
+                    <span className="text-[11px] font-bold text-[#0066FF]">Default Pct: {activeTruck.pct}%</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {trucksForCard.map(t => {
+                      const isSel = t.type === activeTruck.type;
+                      const tPct = truckRowConfig[t.type]?.pct ?? t.pct;
+                      return (
+                        <button
+                          key={t.type}
+                          type="button"
+                          onClick={() => {
+                            setPricingTab(card.tab);
+                            setCardTruckType(prev => ({ ...prev, [card.tab]: t.type }));
+                          }}
+                          className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold transition cursor-pointer border ${
+                            isSel
+                              ? 'bg-[#0066FF] text-white border-[#0066FF] shadow-sm'
+                              : 'bg-white text-[#334155] border-slate-200 hover:border-blue-300'
+                          }`}
+                        >
+                          {t.type.replace(' (Semi)', '')} <span className={isSel ? 'text-blue-100' : 'text-[#0066FF]'}>({tPct}%)</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Step 2: Select Flat Weekly vs Flat Percentage */}
+                  <div className="pt-1 space-y-2">
+                    <label className="text-[11px] font-extrabold uppercase tracking-wider text-[#0F172A] block">2. Choose Plan for {activeTruck.type}:</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCardPlanMode(prev => ({ ...prev, [card.tab]: 'flat' }));
+                          setTruckMode(activeTruck.type, 'flat');
+                        }}
+                        className={`py-2 px-3 rounded-xl text-xs font-extrabold border transition cursor-pointer flex flex-col items-center ${
+                          mode === 'flat'
+                            ? 'bg-[#0066FF] text-white border-[#0066FF] shadow-sm'
+                            : 'bg-white text-[#0F172A] border-slate-200 hover:border-blue-300'
+                        }`}
+                      >
+                        <span>Flat Weekly Rate</span>
+                        <span className={`text-[11px] font-semibold ${mode === 'flat' ? 'text-blue-100' : 'text-[#0066FF]'}`}>${card.flatPrice}/week flat</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCardPlanMode(prev => ({ ...prev, [card.tab]: 'pct' }));
+                          setTruckMode(activeTruck.type, 'pct');
+                        }}
+                        className={`py-2 px-3 rounded-xl text-xs font-extrabold border transition cursor-pointer flex flex-col items-center ${
+                          mode === 'pct'
+                            ? 'bg-[#0066FF] text-white border-[#0066FF] shadow-sm'
+                            : 'bg-white text-[#0F172A] border-slate-200 hover:border-blue-300'
+                        }`}
+                      >
+                        <span>Flat Percentage (%)</span>
+                        <span className={`text-[11px] font-semibold ${mode === 'pct' ? 'text-blue-100' : 'text-emerald-700'}`}>{activePct}% of load gross</span>
+                      </button>
+                    </div>
+
+                    {/* Truck-Specific Flat Percentage Option Selector */}
+                    {mode === 'pct' && (
+                      <div className="flex items-center justify-between gap-2 pt-1 bg-white px-3 py-2 rounded-xl border border-blue-100">
+                        <span className="text-[11px] font-bold text-[#475569]">Select {activeTruck.type.replace(' (Semi)', '')} Flat %:</span>
+                        <div className="flex items-center gap-1">
+                          {activeTruck.pctOptions.map(pOpt => (
+                            <button
+                              key={pOpt}
+                              type="button"
+                              onClick={() => setTruckPct(activeTruck.type, pOpt)}
+                              className={`px-2.5 py-1 rounded-lg text-xs font-extrabold transition cursor-pointer ${
+                                activePct === pOpt
+                                  ? 'bg-[#0066FF] text-white'
+                                  : 'bg-slate-100 text-[#0F172A] hover:bg-blue-50'
+                              }`}
+                            >
+                              {pOpt}%
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Dynamic Price Display */}
+                <div className="flex items-baseline justify-between flex-wrap gap-2 pt-2 border-t border-slate-100">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-4xl sm:text-5xl font-extrabold text-[#0066FF]">
+                      {mode === 'flat' ? `$${card.flatPrice}` : `${activePct}%`}
+                    </span>
+                    <span className="text-sm font-bold text-[#475569]">
+                      {mode === 'flat' ? '/ week flat' : `flat % (${activeTruck.type.replace(' (Semi)', '')})`}
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <span className="block text-[11px] font-bold text-emerald-700">
+                      Est. Take-Home: ${estNetTakeHome.toLocaleString()}/wk
+                    </span>
+                    <span className="block text-[10px] text-[#64748B]">
+                      Avg Gross ${activeTruck.gross.toLocaleString()}/wk · Fee: ${selectedWeeklyFee.toLocaleString()}/wk
+                    </span>
+                  </div>
+                </div>
+
+                <ul className="space-y-2 text-xs text-[#0F172A]">
+                  <li className="flex items-center gap-2.5 font-bold text-[#0066FF]">
+                    <Check className="w-4 h-4 text-[#0066FF] stroke-[2.5] shrink-0" />
+                    <span>
+                      Selected: {activeTruck.type} — {mode === 'flat' ? `Flat $${card.flatPrice}/wk` : `${activePct}% Flat Percentage`}
+                    </span>
                   </li>
-                ))}
-              </ul>
+                  {card.baseFeatures.map(f => (
+                    <li key={f} className="flex items-center gap-2.5">
+                      <Check className="w-4 h-4 text-[#0066FF] stroke-[2.5] shrink-0" /><span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <button
+                type="button"
+                onClick={() => chooseTruckPlan(activeTruck.type, mode, activePct)}
+                className="mt-6 w-full py-3.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold text-sm shadow-[0_8px_20px_rgba(0,102,255,0.28)] flex items-center justify-center gap-2 transition cursor-pointer"
+              >
+                <span>Start Free Trial ({activeTruck.type.replace(' (Semi)', '')} · {mode === 'flat' ? `$${card.flatPrice}/wk` : `${activePct}%`})</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
-            <button onClick={() => nav('get-started')} className="mt-7 w-full py-3.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold text-sm shadow-[0_8px_20px_rgba(0,102,255,0.28)] flex items-center justify-center gap-2 transition">
-              <span>Start Free Trial</span><ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Calculator */}
@@ -780,10 +953,10 @@ export default function App() {
         <div className="relative z-10 p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
             <span className="text-xs font-bold uppercase text-[#0066FF]">The Math Doesn't Lie</span>
-            <h3 className="text-2xl font-extrabold text-[#0F172A]">Compare and Save</h3>
-            <p className="text-sm font-semibold text-[#475569]">Save up to <strong className="text-[#0066FF]">$460/week ($23,920/year)</strong> on a $12K Dry Van gross vs. 8% commission dispatchers.</p>
+            <h3 className="text-2xl font-extrabold text-[#0F172A]">Compare Flat Weekly vs. Percentage by Truck</h3>
+            <p className="text-sm font-semibold text-[#475569]">Compare your weekly take-home under our <strong className="text-[#0066FF]">Flat Weekly Rate ($500/$800)</strong> vs. <strong className="text-[#0F172A]">Truck-Specific Percentage (%)</strong>.</p>
           </div>
-          <button onClick={() => setShowCalc(c => !c)} className="px-6 py-3 rounded-full bg-[#0066FF] text-white text-xs font-bold shadow-md flex items-center gap-2 transition self-start md:self-auto">
+          <button onClick={() => setShowCalc(c => !c)} className="px-6 py-3 rounded-full bg-[#0066FF] text-white text-xs font-bold shadow-md flex items-center gap-2 transition self-start md:self-auto cursor-pointer">
             {showCalc ? 'Hide Calculator' : 'Open Calculator'} <ArrowRight className="w-4 h-4" />
           </button>
         </div>
@@ -793,14 +966,14 @@ export default function App() {
         <div className="space-y-6">
           <div className="bg-[#F0F7FF] rounded-3xl p-6 sm:p-8 border border-blue-200 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h4 className="text-xl font-extrabold text-[#0F172A]">Weekly & Annual Savings Calculator</h4>
-                <span className="text-[11px] font-bold text-emerald-700 bg-emerald-100/70 px-2.5 py-1 rounded-full">Percentage Negotiable</span>
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <h4 className="text-xl font-extrabold text-[#0F172A]">Weekly &amp; Annual Plan Comparison</h4>
+                <span className="text-[11px] font-bold text-[#0066FF] bg-blue-100/80 px-2.5 py-1 rounded-full">Flat Rate vs. Percentage</span>
               </div>
               <div className="flex gap-2">
                 {['semi','box'].map(p => (
-                  <button key={p} onClick={() => setCalcPlan(p)} className={`px-4 py-2 rounded-xl text-xs font-bold transition ${calcPlan === p ? 'bg-[#0066FF] text-white' : 'bg-white text-slate-700'}`}>
-                    {p === 'semi' ? 'Semi ($500/wk)' : 'Box/Hotshot ($800/wk)'}
+                  <button key={p} onClick={() => setCalcPlan(p)} className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${calcPlan === p ? 'bg-[#0066FF] text-white' : 'bg-white text-slate-700'}`}>
+                    {p === 'semi' ? 'Semi ($500/wk Flat)' : 'Box/Hotshot ($800/wk Flat)'}
                   </button>
                 ))}
               </div>
@@ -817,25 +990,30 @@ export default function App() {
               </div>
               <div className="bg-white p-4 rounded-2xl border border-blue-100 space-y-2">
                 <div className="flex justify-between text-xs font-bold">
-                  <span>Industry Commission (%):</span><span className="text-rose-600">{calcPct}% per load</span>
+                  <span>Selected Truck Percentage (%):</span><span className="text-rose-600">{calcPct}% per load</span>
                 </div>
-                <input type="range" min={5} max={14} step={1} value={calcPct} onChange={e => setCalcPct(Number(e.target.value))} className="w-full accent-rose-600" />
+                <input type="range" min={4} max={12} step={1} value={calcPct} onChange={e => setCalcPct(Number(e.target.value))} className="w-full accent-rose-600" />
+                <div className="flex justify-between text-[10px] text-slate-400">
+                  <span>4% (Semi Fleet)</span>
+                  <span>5%–6% (Standard Semi)</span>
+                  <span>8%–9% (Box / Hotshot)</span>
+                </div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-white p-5 rounded-2xl border border-rose-200 space-y-2">
-                <span className="text-[11px] font-bold text-rose-600 uppercase">{calcPct}% Commission</span>
-                <p className="text-xs text-slate-500">Fee: -${savings.comm.toLocaleString()}</p>
+                <span className="text-[11px] font-bold text-rose-600 uppercase">{calcPct}% Flat Percentage</span>
+                <p className="text-xs text-slate-500">Fee: -${savings.comm.toLocaleString()}/wk</p>
                 <p className="text-2xl font-extrabold text-slate-800">Keep: ${savings.keepComm.toLocaleString()}</p>
               </div>
               <div className="bg-white p-5 rounded-2xl border-2 border-[#0066FF] space-y-2">
-                <span className="text-[11px] font-bold text-[#0066FF] uppercase">Roadway Flat-Rate</span>
-                <p className="text-xs text-emerald-600 font-semibold">Fee: -${savings.flat}</p>
+                <span className="text-[11px] font-bold text-[#0066FF] uppercase">Flat Weekly Rate</span>
+                <p className="text-xs text-emerald-600 font-semibold">Fee: -${savings.flat}/wk</p>
                 <p className="text-2xl font-extrabold text-[#0F172A]">Keep: ${savings.keepFlat.toLocaleString()}</p>
               </div>
               <div className="col-span-2 bg-[#0F172A] text-white p-5 rounded-2xl flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-sky-400 font-bold uppercase">Annual Net Savings (52 Weeks)</p>
+                  <p className="text-xs text-sky-400 font-bold uppercase">Annual Difference (52 Weeks)</p>
                   <p className="text-3xl font-extrabold text-emerald-400 mt-0.5">+${Math.max(0, savings.yearlySaved).toLocaleString()}/yr</p>
                 </div>
                 <span className="text-xs bg-white/10 px-3 py-1.5 rounded-full font-bold">+${Math.max(0, savings.weeklySaved).toLocaleString()}/wk</span>
@@ -843,39 +1021,107 @@ export default function App() {
             </div>
           </div>
 
-          {/* Market Rates Table */}
+          {/* Market Rates Table with Per-Truck Flat vs Percentage Selector */}
           <div className="bg-white rounded-2xl border border-blue-100 overflow-hidden shadow-sm">
-            <div className="p-4 bg-[#F8FBFF] border-b border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="p-4 bg-[#F8FBFF] border-b border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h4 className="font-extrabold text-sm text-[#0F172A]">2026 Market Spot Rates — All Equipment Types</h4>
-                <p className="text-xs text-[#64748B]">Updated DAT Sept 2026 benchmarks & actual Roadway Logistics averages</p>
+                <h4 className="font-extrabold text-sm text-[#0F172A]">2026 Market Spot Rates — Select Flat Rate or Percentage for Each Truck</h4>
+                <p className="text-xs text-[#64748B]">Click Flat Weekly ($500/$800) or Flat Percentage (4%–10%) on any truck row below to customize your plan</p>
               </div>
-              <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold self-start">
-                Percentage is Negotiable
-              </span>
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                <span className="text-[11px] font-bold text-[#475569]">Set All Trucks:</span>
+                <button
+                  type="button"
+                  onClick={() => setAllTrucksMode('flat')}
+                  className="px-3 py-1.5 rounded-full bg-[#0066FF] text-white text-[11px] font-bold hover:bg-[#0052CC] transition cursor-pointer"
+                >
+                  All Flat Weekly
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAllTrucksMode('pct')}
+                  className="px-3 py-1.5 rounded-full bg-emerald-600 text-white text-[11px] font-bold hover:bg-emerald-700 transition cursor-pointer"
+                >
+                  All Flat Percentage (%)
+                </button>
+              </div>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead><tr className="border-b border-slate-200 text-[#64748B] bg-slate-50/70">
-                  <th className="py-3 px-4 font-bold">Equipment</th>
+                  <th className="py-3 px-4 font-bold">Equipment Type</th>
                   <th className="py-3 px-4 font-bold">Spot Rate</th>
-                  <th className="py-3 px-4 font-bold">Weekly Gross Range</th>
                   <th className="py-3 px-4 font-bold">Avg Gross/Wk</th>
-                  <th className="py-3 px-4 font-bold">Our Flat Fee</th>
+                  <th className="py-3 px-4 font-bold">Select Plan (Flat vs %)</th>
+                  <th className="py-3 px-4 font-bold">Truck % Option</th>
+                  <th className="py-3 px-4 font-bold">Selected Fee/Wk</th>
                   <th className="py-3 px-4 font-bold text-emerald-700">Net Take-Home/Wk</th>
+                  <th className="py-3 px-4 font-bold text-right">Action</th>
                 </tr></thead>
                 <tbody className="divide-y divide-slate-100">
                   {MARKET_RATES.map(r => {
-                    const flatFee = r.fee.includes('500') ? 500 : 800;
-                    const netKeep = r.gross - flatFee;
+                    const rowCfg = truckRowConfig[r.type] || { mode: 'flat', pct: r.pct };
+                    const isFlat = rowCfg.mode === 'flat';
+                    const activePct = rowCfg.pct ?? r.pct;
+                    const pctFee = Math.round(r.gross * activePct / 100);
+                    const appliedFee = isFlat ? r.flatFee : pctFee;
+                    const netKeep = r.gross - appliedFee;
                     return (
                       <tr key={r.type} className="hover:bg-blue-50/40 transition-colors">
-                        <td className="py-3 px-4 font-bold text-[#0F172A]">{r.type}</td>
+                        <td className="py-3 px-4">
+                          <span className="font-bold text-[#0F172A] block">{r.type}</span>
+                          <span className="text-[10px] text-[#64748B]">{r.range}/wk</span>
+                        </td>
                         <td className="py-3 px-4 font-bold text-[#0066FF]">${r.rate.toFixed(2)}/mi</td>
-                        <td className="py-3 px-4 font-semibold text-slate-700">{r.range}</td>
                         <td className="py-3 px-4 font-bold text-emerald-700">${r.gross.toLocaleString()}/wk</td>
-                        <td className="py-3 px-4 font-extrabold text-[#0066FF]">{r.fee}</td>
+                        <td className="py-3 px-4">
+                          <div className="inline-flex rounded-xl p-0.5 bg-slate-100 border border-slate-200">
+                            <button
+                              type="button"
+                              onClick={() => setTruckMode(r.type, 'flat')}
+                              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                                isFlat ? 'bg-[#0066FF] text-white shadow-xs' : 'text-[#475569] hover:text-[#0F172A]'
+                              }`}
+                            >
+                              Flat ${r.flatFee}/wk
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setTruckMode(r.type, 'pct')}
+                              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                                !isFlat ? 'bg-emerald-600 text-white shadow-xs' : 'text-[#475569] hover:text-[#0F172A]'
+                              }`}
+                            >
+                              {activePct}% Pct
+                            </button>
+                          </div>
+                        </td>
+                        <td className="py-3 px-4">
+                          <select
+                            value={activePct}
+                            onChange={e => setTruckPct(r.type, Number(e.target.value))}
+                            className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-xs font-bold text-[#0F172A] focus:outline-none focus:border-[#0066FF] cursor-pointer"
+                          >
+                            {r.pctOptions.map(opt => (
+                              <option key={opt} value={opt}>
+                                {opt}% Flat ({opt === r.pct ? 'Standard' : 'Option'})
+                              </option>
+                            ))}
+                          </select>
+                        </td>
+                        <td className="py-3 px-4 font-extrabold text-[#0066FF]">
+                          {isFlat ? `$${r.flatFee}/wk (Flat)` : `${activePct}% ($${pctFee.toLocaleString()}/wk)`}
+                        </td>
                         <td className="py-3 px-4 font-extrabold text-[#0F172A]">${netKeep.toLocaleString()}/wk</td>
+                        <td className="py-3 px-4 text-right">
+                          <button
+                            type="button"
+                            onClick={() => chooseTruckPlan(r.type, rowCfg.mode, activePct)}
+                            className="px-3 py-1.5 rounded-full bg-[#E6F0FF] hover:bg-[#0066FF] text-[#0066FF] hover:text-white font-bold text-[11px] transition cursor-pointer"
+                          >
+                            Select {isFlat ? `$${r.flatFee}` : `${activePct}%`} →
+                          </button>
+                        </td>
                       </tr>
                     );
                   })}
@@ -1245,40 +1491,146 @@ export default function App() {
   );
 
   // ─── GET STARTED PAGE (full form) ─────────────────────────────────────────
-  const GetStarted = () => (
-    <section className="glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 space-y-8 max-w-2xl mx-auto">
-      <div className="space-y-2">
-        <span className="inline-block px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">3-Day Free Trial · No Card Required · No Contract</span>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Get Started</h2>
-        <p className="text-sm text-[#475569]">Flat $500/wk Semis · $800/wk Box & Hotshot (Percentage is Negotiable). Our dispatch team will call you right away to complete onboarding.</p>
-      </div>
-      <form onSubmit={submitGetStarted} className="space-y-4">
-        {[
-          { label:'Full Name *', field:'fullName', type:'text', ph:'Your full name', req: true },
-          { label:'Phone Number *', field:'phone', type:'tel', ph:'(209) 202-3080', req: true },
-          { label:'MC or USDOT # (Optional)', field:'mcNumber', type:'text', ph:'MC-#######', req: false }
-        ].map(f => (
-          <div key={f.field}>
-            <label className="text-xs font-bold text-[#475569] block mb-1">{f.label}</label>
-            <input type={f.type} required={f.req} value={startF.values[f.field]} onChange={startF.set(f.field)} placeholder={f.ph} className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-[#0066FF]" />
-          </div>
-        ))}
-        <div>
-          <label className="text-xs font-bold text-[#475569] block mb-1">Service Needed *</label>
-          <select value={startF.values.serviceType} onChange={startF.set('serviceType')} className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm">
-            {['Semi Truck — $500/week (Dry Van, Reefer, Flatbed)','Box Truck / Hotshot — $800/week','Negotiable Percentage Dispatch Option','MC Authority Setup — $250 one-time','Driver Hiring — $500 per placement','Website Design — $274 one-time','Compliance / Accounting / Logbook'].map(o => <option key={o}>{o}</option>)}
-          </select>
+  const GetStarted = () => {
+    const selectedTruckObj = MARKET_RATES.find(r => r.type === startTruck) || MARKET_RATES[0];
+    const activePct = truckRowConfig[selectedTruckObj.type]?.pct ?? selectedTruckObj.pct;
+    const dispatchOptionLabels = MARKET_RATES.flatMap(r => [
+      `${r.type} — Flat Rate ($${r.flatFee}/wk)`,
+      `${r.type} — Flat Percentage (${truckRowConfig[r.type]?.pct ?? r.pct}% per load)`
+    ]);
+    const otherServices = [
+      'MC Authority Setup — $250 one-time',
+      'Factoring Assistance — $120 one-time',
+      'Driver Hiring — $500 per placement',
+      'Website Design — $274 one-time',
+      'Compliance / Accounting / Logbook'
+    ];
+
+    return (
+      <section className="glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 space-y-8 max-w-2xl mx-auto">
+        <div className="space-y-2">
+          <span className="inline-block px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">3-Day Free Trial · No Card Required · No Contract</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Get Started</h2>
+          <p className="text-sm text-[#475569]">Select your truck type below and choose either its <strong className="text-[#0F172A]">Flat Weekly Rate ($500/$800/wk)</strong> or its <strong className="text-[#0066FF]">Truck-Specific Flat Percentage ({selectedTruckObj.pct}%)</strong>. Our dispatch team will call you right away to complete onboarding.</p>
         </div>
-        <ResultAlert result={startF.result} />
-        <Btn loading={startF.loading} type="submit" className="w-full py-4 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold text-sm shadow-[0_8px_20px_rgba(0,102,255,0.28)] transition">
-          {!startF.loading && 'Start 3-Day Free Trial →'}
-        </Btn>
-        <p className="text-center text-xs text-[#64748B]">
-          Prefer to call? <a href={COMPANY.phoneHref} className="text-[#0066FF] font-bold">{COMPANY.phone}</a>
-        </p>
-      </form>
-    </section>
-  );
+
+        {/* Interactive Truck & Flat vs Percentage Picker */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#F8FBFF] border border-blue-200 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="text-xs font-bold text-[#0F172A] block mb-1.5">1. Select Your Truck Type *</label>
+              <select
+                value={selectedTruckObj.type}
+                onChange={e => {
+                  const newTruck = MARKET_RATES.find(r => r.type === e.target.value) || MARKET_RATES[0];
+                  const pctForNew = truckRowConfig[newTruck.type]?.pct ?? newTruck.pct;
+                  setStartTruck(newTruck.type);
+                  const newLabel = startBilling === 'flat'
+                    ? `${newTruck.type} — Flat Rate ($${newTruck.flatFee}/wk)`
+                    : `${newTruck.type} — Flat Percentage (${pctForNew}% per load)`;
+                  startF.setValue('serviceType', newLabel);
+                }}
+                className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-[#0F172A] focus:outline-none focus:border-[#0066FF]"
+              >
+                {MARKET_RATES.map(r => (
+                  <option key={r.type} value={r.type}>
+                    {r.type} — Flat ${r.flatFee}/wk or {r.pct}% Pct
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="text-xs font-bold text-[#0F172A] block mb-1.5">2. Choose Flat Rate or Percentage *</label>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStartBilling('flat');
+                    setTruckMode(selectedTruckObj.type, 'flat');
+                    startF.setValue('serviceType', `${selectedTruckObj.type} — Flat Rate ($${selectedTruckObj.flatFee}/wk)`);
+                  }}
+                  className={`py-2 px-3 rounded-xl text-xs font-extrabold border transition cursor-pointer ${
+                    startBilling === 'flat'
+                      ? 'bg-[#0066FF] text-white border-[#0066FF]'
+                      : 'bg-white text-[#0F172A] border-slate-200 hover:border-blue-300'
+                  }`}
+                >
+                  Flat (${selectedTruckObj.flatFee}/wk)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStartBilling('pct');
+                    setTruckMode(selectedTruckObj.type, 'pct');
+                    startF.setValue('serviceType', `${selectedTruckObj.type} — Flat Percentage (${activePct}% per load)`);
+                  }}
+                  className={`py-2 px-3 rounded-xl text-xs font-extrabold border transition cursor-pointer ${
+                    startBilling === 'pct'
+                      ? 'bg-emerald-600 text-white border-emerald-600'
+                      : 'bg-white text-[#0F172A] border-slate-200 hover:border-blue-300'
+                  }`}
+                >
+                  Percentage ({activePct}%)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {startBilling === 'pct' && (
+            <div className="flex items-center justify-between flex-wrap gap-2 pt-2 border-t border-blue-100">
+              <span className="text-xs font-bold text-[#475569]">Select Flat Percentage for {selectedTruckObj.type}:</span>
+              <div className="flex items-center gap-1.5">
+                {selectedTruckObj.pctOptions.map(pOpt => (
+                  <button
+                    key={pOpt}
+                    type="button"
+                    onClick={() => {
+                      setTruckPct(selectedTruckObj.type, pOpt);
+                      startF.setValue('serviceType', `${selectedTruckObj.type} — Flat Percentage (${pOpt}% per load)`);
+                    }}
+                    className={`px-3 py-1 rounded-lg text-xs font-extrabold transition cursor-pointer ${
+                      activePct === pOpt
+                        ? 'bg-[#0066FF] text-white'
+                        : 'bg-white text-[#0F172A] border border-slate-200 hover:border-blue-300'
+                    }`}
+                  >
+                    {pOpt}%
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <form onSubmit={submitGetStarted} className="space-y-4">
+          {[
+            { label:'Full Name *', field:'fullName', type:'text', ph:'Your full name', req: true },
+            { label:'Phone Number *', field:'phone', type:'tel', ph:'(209) 202-3080', req: true },
+            { label:'MC or USDOT # (Optional)', field:'mcNumber', type:'text', ph:'MC-#######', req: false }
+          ].map(f => (
+            <div key={f.field}>
+              <label className="text-xs font-bold text-[#475569] block mb-1">{f.label}</label>
+              <input type={f.type} required={f.req} value={startF.values[f.field]} onChange={startF.set(f.field)} placeholder={f.ph} className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:border-[#0066FF]" />
+            </div>
+          ))}
+          <div>
+            <label className="text-xs font-bold text-[#475569] block mb-1">Selected Plan / Service *</label>
+            <select value={startF.values.serviceType} onChange={startF.set('serviceType')} className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-[#0F172A]">
+              {[...dispatchOptionLabels, ...otherServices].map(o => <option key={o} value={o}>{o}</option>)}
+            </select>
+          </div>
+          <ResultAlert result={startF.result} />
+          <Btn loading={startF.loading} type="submit" className="w-full py-4 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold text-sm shadow-[0_8px_20px_rgba(0,102,255,0.28)] transition cursor-pointer">
+            {!startF.loading && 'Start 3-Day Free Trial →'}
+          </Btn>
+          <p className="text-center text-xs text-[#64748B]">
+            Prefer to call? <a href={COMPANY.phoneHref} className="text-[#0066FF] font-bold">{COMPANY.phone}</a>
+          </p>
+        </form>
+      </section>
+    );
+  };
 
   // ─── WEBSITE PAGE ─────────────────────────────────────────────────────────
   const Website = () => (
@@ -1594,7 +1946,7 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/65 to-[#0F172A]/75" />
           <div className="relative z-10 max-w-2xl mx-auto px-6 py-12 space-y-4">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Ready to Grow Your Trucking Business?</h2>
-            <p className="text-sm font-medium text-[#1E293B]">Flat $500/wk Semis · $800/wk Box & Hotshot (Percentage is Negotiable). Start your 3-day free trial today.</p>
+            <p className="text-sm font-medium text-[#1E293B]">Choose Flat Weekly Rate ($500/wk Semis · $800/wk Box &amp; Hotshot) or Truck-Specific Flat Percentage (5%–9%). Start your 3-day free trial today.</p>
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
               <a href={COMPANY.phoneHref} className="px-7 py-3.5 rounded-full bg-[#0066FF] text-white font-bold text-sm shadow-[0_8px_24px_rgba(0,102,255,0.35)] flex items-center gap-2 transition hover:bg-[#0052CC]">
                 <Phone className="w-4 h-4" />{COMPANY.phone}
