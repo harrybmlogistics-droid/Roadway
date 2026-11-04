@@ -1439,8 +1439,46 @@ export default function App() {
     { id:'admin',        label:'⚙ Admin' }
   ];
 
+  const VIDEO_SRC = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260423_084718_72a17915-4964-4059-afcd-22d59399b72e.mp4';
+
+  const RwVideoHero = () => (
+    <section className="rw-hero">
+      {/* Background Video */}
+      <video
+        className="rw-hero-video"
+        src={VIDEO_SRC}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+
+      {/* Ambient Roadway Logo Watermark */}
+      <div className="rw-hero-logo-bg" aria-hidden="true" />
+
+      {/* Foreground Content */}
+      <div className="rw-hero-content">
+        <h1>ROADWAY LOGISTICS GROUP LLC</h1>
+        <p>Nationwide Dispatch &amp; Integrated Freight Solutions</p>
+      </div>
+    </section>
+  );
+
   return (
     <div className="min-h-screen liquid-glass-bg text-[#0F172A] font-sans selection:bg-[#0066FF] selection:text-white relative w-full max-w-full" style={{ overflowX: 'clip' }}>
+      {/* Full-Website Fixed Background Video + Ambient Roadway Logo Watermark */}
+      <div className="rw-site-bg" aria-hidden="true">
+        <video
+          className="rw-hero-video"
+          src={VIDEO_SRC}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+        <div className="rw-hero-logo-bg" aria-hidden="true" />
+      </div>
+
       {/* Floating Fluid Ambient Orbs for Liquid Glass Refraction */}
       <div className="fixed top-[-10%] left-[-8%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tr from-[#0066FF]/14 via-[#38BDF8]/12 to-transparent blur-[120px] pointer-events-none animate-pulse-slow z-0" />
       <div className="fixed bottom-[-15%] right-[-10%] w-[65vw] h-[65vw] rounded-full bg-gradient-to-bl from-[#0052CC]/12 via-[#60A5FA]/14 to-transparent blur-[140px] pointer-events-none animate-pulse-slow-reverse z-0" />
@@ -1522,6 +1560,7 @@ export default function App() {
       <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 relative z-10">
         {page === 'home' && (
           <div className="space-y-12">
+            <RwVideoHero />
             <Hero />
             <RwDispatchHero />
             <Services />
@@ -1532,6 +1571,7 @@ export default function App() {
         )}
         {page === 'dispatch' && (
           <div className="space-y-10">
+            <RwVideoHero />
             <Hero />
             <RwDispatchHero />
             <Pricing />

@@ -247,3 +247,80 @@ button {
   mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.85) 20%, rgba(0, 0, 0, 0) 95%);
   -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.85) 20%, rgba(0, 0, 0, 0) 95%);
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ROADWAY VIDEO HERO & FULL-WEBSITE BACKGROUND WATERMARK
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.rw-site-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #080b12;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.rw-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  max-height: 760px;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: #080b12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid rgba(255, 255, 255, 0.78);
+  box-shadow: 0 25px 60px -15px rgba(0, 15, 45, 0.35);
+}
+
+.rw-hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0.65;
+}
+
+.rw-hero-logo-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: url('/roadway-logo.jpg') center center / min(55vw, 480px) no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.22;
+  -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 55%, transparent 100%);
+  pointer-events: none;
+}
+
+.rw-hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: #fff;
+  padding: 0 1.5rem;
+}
+
+.rw-hero-content h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.65);
+  margin-bottom: 0.75rem;
+}
+
+.rw-hero-content p {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+}
+

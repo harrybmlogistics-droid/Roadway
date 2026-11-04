@@ -200,8 +200,22 @@
   right: 0;
   top: var(--edge-px);
   bottom: 0;
+  overflow: hidden;
   z-index: 4;
   pointer-events: none;
+}
+
+.kv-freight-showcase .band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('/roadway-logo.jpg') center center / min(52vw, 460px) no-repeat;
+  mix-blend-mode: screen;
+  opacity: 0.16;
+  -webkit-mask-image: radial-gradient(ellipse 68% 68% at 50% 50%, #000 52%, transparent 100%);
+  mask-image: radial-gradient(ellipse 68% 68% at 50% 50%, #000 52%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Horizontal Services Strip inside Band */
@@ -209,6 +223,7 @@
   position: absolute;
   top: calc(76 * var(--u));
   left: 0;
+  z-index: 2;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
