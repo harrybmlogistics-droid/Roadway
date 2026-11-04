@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { api } from './api';
 import RwDispatchHero from './RwDispatchHero';
+import KvFreightShowcase from './KvFreightShowcase';
 
 // ============================================================================
 // CONSTANTS
@@ -1511,7 +1512,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen liquid-glass-bg text-[#0F172A] font-sans selection:bg-[#0066FF] selection:text-white relative overflow-x-hidden w-full max-w-full">
+    <div className="min-h-screen liquid-glass-bg text-[#0F172A] font-sans selection:bg-[#0066FF] selection:text-white relative w-full max-w-full" style={{ overflowX: 'clip' }}>
       {/* Floating Fluid Ambient Orbs for Liquid Glass Refraction */}
       <div className="fixed top-[-10%] left-[-8%] w-[55vw] h-[55vw] rounded-full bg-gradient-to-tr from-[#0066FF]/14 via-[#38BDF8]/12 to-transparent blur-[120px] pointer-events-none animate-pulse-slow z-0" />
       <div className="fixed bottom-[-15%] right-[-10%] w-[65vw] h-[65vw] rounded-full bg-gradient-to-bl from-[#0052CC]/12 via-[#60A5FA]/14 to-transparent blur-[140px] pointer-events-none animate-pulse-slow-reverse z-0" />
@@ -1676,6 +1677,9 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* KV FREIGHT GROUP SCROLL SHOWCASE AT END OF WEBSITE */}
+      <KvFreightShowcase onNav={nav} />
 
       {/* ─── MODALS ─────────────────────────────────────────────────────────── */}
 

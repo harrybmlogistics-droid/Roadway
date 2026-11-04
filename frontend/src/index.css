@@ -16,7 +16,7 @@ html, body {
   padding: 0;
   width: 100%;
   min-height: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   color: #0F172A;
   background-color: #F8FAFD;
@@ -28,7 +28,7 @@ html, body {
 #root {
   width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Remove default gray browser button borders and background */
@@ -73,7 +73,7 @@ button {
     linear-gradient(180deg, #FFFFFF 0%, #F0F6FF 30%, #EBF3FF 60%, #F5F9FF 100%);
   background-attachment: fixed;
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Liquid Glass Primary Container / Section Panel */
