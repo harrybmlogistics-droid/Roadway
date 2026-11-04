@@ -507,12 +507,9 @@ export default function App() {
 
   const Services = () => (
     <section
-      className="rounded-3xl p-4 sm:p-8 relative"
+      className="glass-panel rounded-3xl p-4 sm:p-8 relative"
       style={{
-        fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
-        background: 'linear-gradient(180deg, #eef5ff 0%, #f8fbff 40%, #ffffff 100%)',
-        border: '1.5px solid rgba(255, 255, 255, 0.9)',
-        boxShadow: '0 20px 50px -12px rgba(15, 76, 189, 0.08)'
+        fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif"
       }}
     >
       {/* HERO SECTION */}
@@ -1522,7 +1519,7 @@ export default function App() {
       </header>
 
       {/* MAIN */}
-      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 relative z-10">
         {page === 'home' && (
           <div className="space-y-12">
             <Hero />
@@ -1571,7 +1568,7 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-white/90 backdrop-blur-2xl border-t border-blue-100 mt-12 pt-14 pb-10">
+      <footer className="bg-white/60 backdrop-blur-lg border-t border-white/70 mt-12 pt-14 pb-10 relative z-10">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-xs text-[#475569]">
             <div className="lg:col-span-2 space-y-3.5">
