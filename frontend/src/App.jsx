@@ -1455,8 +1455,8 @@ export default function App() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <button onClick={() => nav('home')} className="flex items-center gap-3 group cursor-pointer border-0 outline-none bg-transparent p-0 shadow-none">
-              <div className="px-3 py-1.5 rounded-2xl bg-gradient-to-tr from-[#0066FF] to-[#38BDF8] shadow-[0_8px_20px_rgba(0,102,255,0.35),inset_0_1px_1px_rgba(255,255,255,0.6)] border border-white/40 group-hover:scale-105 transition-transform">
-                <span className="text-2xl font-black tracking-tighter text-white drop-shadow-sm">RLG</span>
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl overflow-hidden bg-[#0A0E17] shadow-[0_8px_20px_rgba(0,102,255,0.32)] border border-blue-200/80 group-hover:scale-105 transition-transform shrink-0 flex items-center justify-center p-1">
+                <img src="/rlg-logo.jpg" alt="Roadway Logistics Group LLC Logo" className="w-full h-full object-contain rounded-xl" />
               </div>
               <div className="leading-tight text-left">
                 <span className="block font-extrabold text-sm sm:text-base text-[#0F172A] group-hover:text-[#0066FF] transition">Roadway Logistics</span>
@@ -1576,7 +1576,9 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-xs text-[#475569]">
             <div className="lg:col-span-2 space-y-3.5">
               <div className="flex items-center gap-3">
-                <div className="px-2.5 py-1.5 rounded-xl bg-[#E6F0FF] border border-blue-200"><span className="text-2xl font-black tracking-tighter text-[#0066FF]">RLG</span></div>
+                <div className="w-12 h-12 rounded-2xl overflow-hidden bg-[#0A0E17] border border-blue-200 shadow-md shrink-0 flex items-center justify-center p-1">
+                  <img src="/rlg-logo.jpg" alt="Roadway Logistics Group LLC Logo" className="w-full h-full object-contain rounded-xl" />
+                </div>
                 <div><span className="block font-extrabold text-base text-[#0F172A]">Roadway Logistics</span><span className="block font-bold text-xs text-[#475569]">Group LLC</span></div>
               </div>
               <p className="text-xs leading-relaxed max-w-sm">Professional Dispatch & Trucking Business Services. 5+ years experience, 80+ carriers served.</p>
