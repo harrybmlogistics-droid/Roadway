@@ -283,7 +283,7 @@ export default function App() {
     startF.setLoading(true);
     const res = await api.getStarted(startF.values);
     startF.setLoading(false);
-    if (res.success) { startF.setResult({ ok: true, message: res.message }); startF.reset(); showToast('Trial Activated!', res.message); setPage('home'); }
+    if (res.success) { startF.setResult({ ok: true, message: res.message }); startF.reset(); showToast('Onboarding Started!', res.message); setPage('home'); }
     else startF.setResult({ ok: false, message: res.error || 'Failed. Please call us.' });
   };
 
@@ -520,8 +520,8 @@ export default function App() {
             ))}
           </div>
           <div className="flex flex-wrap gap-3.5 pt-2">
-            <button onClick={() => nav('get-started')} className="px-7 py-3.5 rounded-full font-semibold text-sm text-white bg-[#0066FF] hover:bg-[#0052CC] shadow-[0_8px_24px_rgba(0,102,255,0.32)] flex items-center gap-2 transition hover:-translate-y-0.5">
-              <span>Get Started Free</span><ArrowRight className="w-4 h-4" />
+            <button onClick={() => nav('get-started')} className="px-7 py-3.5 rounded-full font-semibold text-sm text-white bg-[#0066FF] hover:bg-[#0052CC] shadow-[0_8px_24px_rgba(0,102,255,0.32)] flex items-center gap-2 transition hover:-translate-y-0.5 cursor-pointer">
+              <span>Get Started Now</span><ArrowRight className="w-4 h-4" />
             </button>
             <a href={COMPANY.phoneHref} className="px-6 py-3.5 rounded-full font-semibold text-sm text-[#0F172A] bg-white/90 border border-blue-100 shadow-sm flex items-center gap-2 transition">
               <Phone className="w-4 h-4 text-[#0066FF]" /><span>{COMPANY.phone}</span>
@@ -683,9 +683,9 @@ export default function App() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {[
           { tab:'semi', title:'Semi Truck Dispatch', sub:'Dry Van • Reefer • Flatbed • Step Deck • Power Only • Car Hauler • Heavy Haul • Drayage', flatPrice:500, badge:'Most Popular — All Semi Trucks ($11k–$18.5k/wk Gross)',
-            baseFeatures:['Unlimited loads (Dry Van $11k–$13k, Reefer $14k–$15k avg gross)','No setup fee & no forced dispatch','No contract — cancel anytime','3-day free trial (no card required)','Aggressive rate negotiation (15–20% above market)','24/7 dispatch & broker credit checks','Paperwork, carrier packets & rate confirmations'] },
+            baseFeatures:['Unlimited loads (Dry Van $11k–$13k, Reefer $14k–$15k avg gross)','No setup fee & no forced dispatch','No contract — cancel anytime','Same-day carrier onboarding','Aggressive rate negotiation (15–20% above market)','24/7 dispatch & broker credit checks','Paperwork, carrier packets & rate confirmations'] },
           { tab:'box', title:'Box Truck & Hotshot Dispatch', sub:'Box Truck • Hotshot (CDL & non-CDL) • Sprinter Van • Straight Truck', flatPrice:800, badge:'Expedited & Hotshot Desk ($4k–$8k/wk Gross)',
-            baseFeatures:['Unlimited loads (Box Truck $4k–$7k, Hotshot $6k–$8k avg gross)','No setup fee & no forced dispatch','No contract — cancel anytime','3-day free trial (no card required)','LTL partial pairing & full-load negotiation','24/7 dispatch & broker credit vetting','Paperwork, carrier packets & rate confirmations'] }
+            baseFeatures:['Unlimited loads (Box Truck $4k–$7k, Hotshot $6k–$8k avg gross)','No setup fee & no forced dispatch','No contract — cancel anytime','Same-day carrier onboarding','LTL partial pairing & full-load negotiation','24/7 dispatch & broker credit vetting','Paperwork, carrier packets & rate confirmations'] }
         ].map(card => {
           const trucksForCard = MARKET_RATES.filter(r => r.category === card.tab);
           const selectedTruckName = cardTruckType[card.tab] || trucksForCard[0].type;
@@ -697,11 +697,11 @@ export default function App() {
           const estNetTakeHome = activeTruck.gross - selectedWeeklyFee;
 
           return (
-            <div key={card.tab} className={`glass-card rounded-3xl p-7 border-2 flex flex-col justify-between transition ${pricingTab === card.tab ? 'border-[#0066FF] shadow-[0_16px_40px_rgba(0,102,255,0.12)]' : 'border-white opacity-95'}`}>
+            <div key={card.tab} className={`glass-card rounded-3xl p-5 sm:p-7 border-2 flex flex-col justify-between transition ${pricingTab === card.tab ? 'border-[#0066FF] shadow-[0_16px_40px_rgba(0,102,255,0.12)]' : 'border-white opacity-95'}`}>
               <div className="space-y-4">
                 <div className="flex items-center justify-between flex-wrap gap-2">
                   <span className="text-[11px] font-bold uppercase px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF]">{card.badge}</span>
-                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">3-Day Free Trial</span>
+                  <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">24/7 Live Dispatch</span>
                 </div>
                 <div>
                   <h3 className="text-2xl font-extrabold text-[#0F172A]">{card.title}</h3>
@@ -838,7 +838,7 @@ export default function App() {
                 onClick={() => chooseTruckPlan(activeTruck.type, mode, activePct)}
                 className="mt-6 w-full py-3.5 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold text-sm shadow-[0_8px_20px_rgba(0,102,255,0.28)] flex items-center justify-center gap-2 transition cursor-pointer"
               >
-                <span>Start Free Trial ({activeTruck.type.replace(' (Semi)', '')} · {mode === 'flat' ? `$${card.flatPrice}/wk` : `${activePct}%`})</span>
+                <span>Select Plan &amp; Start ({activeTruck.type.replace(' (Semi)', '')} · {mode === 'flat' ? `$${card.flatPrice}/wk` : `${activePct}%`})</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -1307,9 +1307,9 @@ export default function App() {
     ];
 
     return (
-      <section className="glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 space-y-8 max-w-2xl mx-auto">
+      <section className="glass-panel rounded-3xl p-5 sm:p-10 lg:p-12 space-y-6 sm:space-y-8 max-w-2xl mx-auto">
         <div className="space-y-2">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">3-Day Free Trial · No Card Required · No Contract</span>
+          <span className="inline-block px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">Same-Day Onboarding · No Setup Fee · No Contract</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Get Started</h2>
           <p className="text-sm text-[#475569]">Select your truck type below and choose either its <strong className="text-[#0F172A]">Flat Weekly Rate ($500/$800/wk)</strong> or its <strong className="text-[#0066FF]">Truck-Specific Flat Percentage ({selectedTruckObj.pct}%)</strong>. Our dispatch team will call you right away to complete onboarding.</p>
         </div>
@@ -1422,7 +1422,7 @@ export default function App() {
           </div>
           <ResultAlert result={startF.result} />
           <Btn loading={startF.loading} type="submit" className="w-full py-4 rounded-full bg-[#0066FF] hover:bg-[#0052CC] text-white font-bold text-sm shadow-[0_8px_20px_rgba(0,102,255,0.28)] transition cursor-pointer">
-            {!startF.loading && 'Start 3-Day Free Trial →'}
+            {!startF.loading && 'Start Dispatch Service →'}
           </Btn>
           <p className="text-center text-xs text-[#64748B]">
             Prefer to call? <a href={COMPANY.phoneHref} className="text-[#0066FF] font-bold">{COMPANY.phone}</a>
@@ -1685,7 +1685,7 @@ export default function App() {
           </div>
         </div>
         {mobileOpen && (
-          <div className="lg:hidden bg-white/90 backdrop-blur-2xl border-b border-white px-4 py-4 shadow-xl">
+          <div className="lg:hidden bg-white/95 backdrop-blur-2xl border-b border-white px-4 py-4 shadow-xl space-y-3">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {NAV_ITEMS.map(item => (
                 <button
@@ -1694,32 +1694,48 @@ export default function App() {
                   className={`px-3.5 py-2.5 rounded-xl text-xs font-bold text-left transition ${
                     page === item.id
                       ? 'bg-[#0066FF] text-white shadow-md'
-                      : 'bg-white/80 text-[#0F172A] border border-blue-50 hover:border-blue-200'
+                      : 'bg-white/90 text-[#0F172A] border border-blue-100 hover:border-blue-300'
                   }`}
                 >
                   {item.label}
                 </button>
               ))}
             </div>
+            <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-200/80">
+              <a
+                href={COMPANY.phoneHref}
+                className="py-2.5 px-4 rounded-xl bg-[#E6F0FF] text-[#0066FF] font-extrabold text-xs flex items-center justify-center gap-1.5"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>{COMPANY.phone}</span>
+              </a>
+              <button
+                onClick={() => nav('get-started')}
+                className="py-2.5 px-4 rounded-xl bg-[#0066FF] text-white font-extrabold text-xs flex items-center justify-center gap-1.5"
+              >
+                <span>Get Started Now</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
         )}
       </header>
 
       {/* MAIN */}
-      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12 relative z-10">
+      <main className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-8 sm:space-y-12 relative z-10">
         {page === 'home' && (
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-12">
             <RwVideoHero />
             <Hero />
             <RwDispatchHero />
             <Services />
             <Pricing />
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"><About /><DriverJobs /></div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"><Contact /><Resources /></div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-start"><About /><DriverJobs /></div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-start"><Contact /><Resources /></div>
           </div>
         )}
         {page === 'dispatch' && (
-          <div className="space-y-10">
+          <div className="space-y-8 sm:space-y-10">
             <RwVideoHero />
             <Hero />
             <RwDispatchHero />
@@ -1730,7 +1746,7 @@ export default function App() {
         {page === 'pricing'      && <Pricing />}
         {page === 'about'        && <About />}
         {page === 'driver-jobs'  && <DriverJobs />}
-        {page === 'hire-drivers' && <div className="space-y-10"><HireDrivers /><DriverJobs /></div>}
+        {page === 'hire-drivers' && <div className="space-y-8 sm:space-y-10"><HireDrivers /><DriverJobs /></div>}
         {page === 'resources'    && <Resources />}
         {page === 'contact'      && <Contact />}
         {page === 'get-started'  && <GetStarted />}
@@ -1738,18 +1754,18 @@ export default function App() {
         {page === 'admin'        && <Admin />}
 
         {/* Global CTA Banner */}
-        <section className="rounded-3xl overflow-hidden relative border-2 border-white shadow-[0_20px_50px_rgba(15,23,42,0.12)] min-h-[260px] flex items-center justify-center text-center">
+        <section className="rounded-3xl overflow-hidden relative border-2 border-white shadow-[0_20px_50px_rgba(15,23,42,0.12)] min-h-[240px] sm:min-h-[260px] flex items-center justify-center text-center">
           <img src={VISUALS.highway} alt="Ready to Grow" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/65 to-[#0F172A]/75" />
-          <div className="relative z-10 max-w-2xl mx-auto px-6 py-12 space-y-4">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Ready to Grow Your Trucking Business?</h2>
-            <p className="text-sm font-medium text-[#1E293B]">Choose Flat Weekly Rate ($500/wk Semis · $800/wk Box &amp; Hotshot) or Truck-Specific Flat Percentage (5%–9%). Start your 3-day free trial today.</p>
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-              <a href={COMPANY.phoneHref} className="px-7 py-3.5 rounded-full bg-[#0066FF] text-white font-bold text-sm shadow-[0_8px_24px_rgba(0,102,255,0.35)] flex items-center gap-2 transition hover:bg-[#0052CC]">
+          <div className="relative z-10 max-w-2xl mx-auto px-5 sm:px-6 py-10 sm:py-12 space-y-4">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0F172A]">Ready to Grow Your Trucking Business?</h2>
+            <p className="text-xs sm:text-sm font-medium text-[#1E293B]">Choose Flat Weekly Rate ($500/wk Semis · $800/wk Box &amp; Hotshot) or Truck-Specific Flat Percentage (5%–9%). Start hauling higher-paying loads today.</p>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2">
+              <a href={COMPANY.phoneHref} className="px-6 sm:px-7 py-3.5 rounded-full bg-[#0066FF] text-white font-bold text-xs sm:text-sm shadow-[0_8px_24px_rgba(0,102,255,0.35)] flex items-center gap-2 transition hover:bg-[#0052CC]">
                 <Phone className="w-4 h-4" />{COMPANY.phone}
               </a>
-              <button onClick={() => nav('get-started')} className="px-7 py-3.5 rounded-full bg-[#0F172A]/90 text-white font-bold text-sm shadow-lg flex items-center gap-2 transition hover:bg-[#0F172A]">
-                Start Free Trial <ArrowRight className="w-4 h-4" />
+              <button onClick={() => nav('get-started')} className="px-6 sm:px-7 py-3.5 rounded-full bg-[#0F172A]/90 text-white font-bold text-xs sm:text-sm shadow-lg flex items-center gap-2 transition hover:bg-[#0F172A] cursor-pointer">
+                Get Started Now <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -1757,7 +1773,7 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-white/60 backdrop-blur-lg border-t border-white/70 mt-12 pt-14 pb-10 relative z-10">
+      <footer className="bg-white/60 backdrop-blur-lg border-t border-white/70 mt-10 sm:mt-12 pt-12 sm:pt-14 pb-24 sm:pb-10 relative z-10">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 text-xs text-[#475569]">
             <div className="lg:col-span-2 space-y-3.5">
@@ -1891,7 +1907,7 @@ export default function App() {
 
       {/* TOAST */}
       {toast && (
-        <div className={`fixed bottom-5 right-5 z-50 max-w-sm p-4 rounded-2xl shadow-2xl border flex items-start gap-3 transition-all ${toast.ok ? 'bg-[#0F172A] border-blue-400/40 text-white' : 'bg-rose-900 border-rose-500/40 text-white'}`}>
+        <div className={`fixed bottom-16 sm:bottom-5 right-4 sm:right-5 z-50 max-w-sm p-4 rounded-2xl shadow-2xl border flex items-start gap-3 transition-all ${toast.ok ? 'bg-[#0F172A] border-blue-400/40 text-white' : 'bg-rose-900 border-rose-500/40 text-white'}`}>
           {toast.ok ? <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" /> : <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />}
           <div className="text-xs">
             <p className="font-bold">{toast.title}</p>
@@ -1899,6 +1915,33 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* STICKY PHONE QUICK-ACTION BAR (<640px) */}
+      <div className="fixed bottom-0 inset-x-0 z-40 sm:hidden bg-[#0F172A]/95 backdrop-blur-xl border-t border-white/15 px-3 py-2.5 flex items-center gap-2 shadow-[0_-8px_24px_rgba(0,0,0,0.45)]">
+        <a
+          href={COMPANY.phoneHref}
+          className="flex-1 py-2.5 px-3 rounded-xl bg-white/10 border border-white/20 text-white font-extrabold text-xs flex items-center justify-center gap-1.5"
+        >
+          <Phone className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+          <span>Call Dispatch</span>
+        </a>
+        <button
+          type="button"
+          onClick={() => nav('pricing')}
+          className="flex-1 py-2.5 px-3 rounded-xl bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center gap-1.5"
+        >
+          <Truck className="w-3.5 h-3.5 shrink-0" />
+          <span>Select Truck</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => nav('get-started')}
+          className="flex-1 py-2.5 px-3 rounded-xl bg-[#0066FF] text-white font-extrabold text-xs flex items-center justify-center gap-1"
+        >
+          <span>Get Started</span>
+          <ArrowRight className="w-3.5 h-3.5 shrink-0" />
+        </button>
+      </div>
     </div>
   );
 }

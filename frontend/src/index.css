@@ -240,7 +240,13 @@ button {
 }
 
 .hero-fade {
-  background: linear-gradient(90deg, rgba(238, 245, 255, 0.88) 38%, rgba(238, 245, 255, 0.65) 58%, rgba(238, 245, 255, 0) 80%);
+  background: linear-gradient(90deg, rgba(238, 245, 255, 0.92) 45%, rgba(238, 245, 255, 0.72) 68%, rgba(238, 245, 255, 0.15) 100%);
+}
+
+@media (max-width: 639px) {
+  .hero-fade {
+    background: linear-gradient(180deg, rgba(238, 245, 255, 0.94) 0%, rgba(238, 245, 255, 0.86) 65%, rgba(238, 245, 255, 0.65) 100%);
+  }
 }
 
 .card-img-mask {
@@ -250,6 +256,7 @@ button {
 
 /* ══════════════════════════════════════════════════════════════════════════════
    ROADWAY VIDEO HERO & FULL-WEBSITE BACKGROUND WATERMARK
+   (Responsive for Phone, Tablet, and PC)
    ══════════════════════════════════════════════════════════════════════════════ */
 
 .rw-site-bg {
@@ -257,6 +264,7 @@ button {
   inset: 0;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: #080b12;
   z-index: 0;
@@ -266,9 +274,8 @@ button {
 .rw-hero {
   position: relative;
   width: 100%;
-  height: 100vh;
-  max-height: 760px;
-  border-radius: 1.5rem;
+  height: clamp(290px, 54vh, 440px);
+  border-radius: 1.25rem;
   overflow: hidden;
   background: #080b12;
   display: flex;
@@ -276,6 +283,21 @@ button {
   justify-content: center;
   border: 1.5px solid rgba(255, 255, 255, 0.78);
   box-shadow: 0 25px 60px -15px rgba(0, 15, 45, 0.35);
+}
+
+/* Tablet View (640px – 1023px) */
+@media (min-width: 640px) {
+  .rw-hero {
+    height: clamp(380px, 64vh, 560px);
+    border-radius: 1.5rem;
+  }
+}
+
+/* PC / Wide Desktop View (1024px+) */
+@media (min-width: 1024px) {
+  .rw-hero {
+    height: clamp(480px, 76vh, 720px);
+  }
 }
 
 .rw-hero-video {
@@ -292,12 +314,24 @@ button {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: url('/roadway-logo.jpg') center center / min(55vw, 480px) no-repeat;
+  background: url('/roadway-logo.jpg') center center / min(74vw, 310px) no-repeat;
   mix-blend-mode: screen;
-  opacity: 0.22;
+  opacity: 0.24;
   -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 55%, transparent 100%);
   mask-image: radial-gradient(ellipse 72% 72% at 50% 50%, #000 55%, transparent 100%);
   pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .rw-hero-logo-bg {
+    background-size: min(62vw, 420px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .rw-hero-logo-bg {
+    background-size: min(55vw, 480px);
+  }
 }
 
 .rw-hero-content {
@@ -305,22 +339,24 @@ button {
   z-index: 3;
   text-align: center;
   color: #fff;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
+  max-width: 56rem;
 }
 
 .rw-hero-content h1 {
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(1.65rem, 5vw, 4rem);
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1.08;
   text-shadow: 0 8px 30px rgba(0, 0, 0, 0.65);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.65rem;
 }
 
 .rw-hero-content p {
-  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-size: clamp(0.92rem, 2vw, 1.35rem);
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
 }
+
 
