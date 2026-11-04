@@ -219,3 +219,22 @@ button {
 ::-webkit-scrollbar-thumb:hover {
   background: #0052CC;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   OUR SERVICES — COMPLETE TRUCKING BUSINESS STACK STYLES
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.icon-box {
+  background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.hero-fade {
+  background: linear-gradient(90deg, #eef5ff 38%, rgba(238, 245, 255, 0.7) 58%, rgba(238, 245, 255, 0) 80%);
+}
+
+.card-img-mask {
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.85) 20%, rgba(0, 0, 0, 0) 95%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 0.85) 20%, rgba(0, 0, 0, 0) 95%);
+}
+

@@ -4,7 +4,8 @@ import {
   Globe, Phone, Mail, MapPin, ArrowRight, CheckCircle2,
   X, Menu, Check, ChevronDown, Zap, Layers, Monitor, FileCheck,
   Loader2, AlertCircle, BarChart3, Database, RefreshCw,
-  Play, Pause, RotateCcw
+  Play, Pause, RotateCcw, Home, ChevronRight, Star, UserCheck,
+  Container, MonitorSmartphone
 } from 'lucide-react';
 import { api } from './api';
 import RwDispatchHero from './RwDispatchHero';
@@ -37,28 +38,28 @@ const VISUALS = {
 };
 
 const CORE_SERVICES = [
-  { id:'dispatch',      title:'Dispatch Service',       price:'$500/wk semi · $800/wk box & hotshot (Negotiable %)', icon:'dispatch', desc:'24/7 load booking, aggressive rate negotiation, zero commission or negotiable percentage.',
+  { id:'dispatch',      title:'Dispatch Service',       price:'$500/wk semi – $800/wk box & hotshot', icon:'dispatch', popular: true,  img:'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80', desc:'24/7 load booking, aggressive rate negotiation, zero commission or negotiable percentage.',
     scope:['24/7 load finding & booking','Rate negotiation with brokers','Broker communication','Route planning','Paperwork & rate confirmations','Load tracking'],
     benefits:['Compare loads against costs','Access premium load boards','No forced dispatch','Keep 100% of rate increases'] },
-  { id:'mc-authority',  title:'MC Authority Setup',     price:'$250 one-time',  icon:'mc',          desc:'USDOT, MC, BOC-3, UCR, permits & more.',
+  { id:'mc-authority',  title:'MC Authority Setup',     price:'$250 one-time',  icon:'mc',          popular: false, img:'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=80', desc:'USDOT, MC, BOC-3, UCR, permits & more.',
     scope:['USDOT registration','MC authority application','BOC-3 filing','UCR registration','State permits guidance','Insurance consultation'],
     benefits:['Start hauling legally','Identify missing info early','Expert guidance','No delays'] },
-  { id:'factoring',     title:'Factoring Assistance',   price:'$120 one-time',  icon:'factoring',   desc:'Compare factors, setup docs, get paid faster.',
+  { id:'factoring',     title:'Factoring Assistance',   price:'$120 one-time',  icon:'factoring',   popular: false, img:'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=600&q=80', desc:'Compare factors, setup docs, get paid faster.',
     scope:['Factoring company comparison','Invoice & POD management','Broker credit checks','Collections assistance','QuickPay vs factoring analysis','Cash flow optimization'],
     benefits:['Same-day / 24-hr funding','Improve weekly cash flow','Compare advance rates','Focus on driving'] },
-  { id:'compliance',    title:'Compliance & Permits',   price:'From $150/mo',   icon:'compliance',  desc:'IFTA, IRP, DOT, drug & alcohol, safety audits.',
+  { id:'compliance',    title:'Compliance & Permits',   price:'From $150/mo',   icon:'compliance',  popular: false, img:'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600&q=80', desc:'IFTA, IRP, DOT, drug & alcohol, safety audits.',
     scope:['DOT compliance monitoring','IFTA reporting','IRP registration','Drug & alcohol program','Safety audit prep','Permit management'],
     benefits:['Track all deadlines','Peace of mind on the road','Organize required records','Proactive management'] },
-  { id:'accounting',    title:'Accounting Services',    price:'From $150',      icon:'accounting',  desc:'Bookkeeping, tax prep, P&L reports.',
+  { id:'accounting',    title:'Accounting Services',    price:'From $150',      icon:'accounting',  popular: false, img:'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=600&q=80', desc:'Bookkeeping, tax prep, P&L reports.',
     scope:['Bookkeeping','Per-truck expense tracking','P&L reporting','Tax prep','Fuel tax reporting','Financial planning'],
     benefits:['Know true profitability/mile','Simplify tax time','Make informed lane decisions','Understand your numbers'] },
-  { id:'driver-hiring', title:'Driver Hiring',          price:'$500 solo · $750 team', icon:'hiring', desc:'CDL-A recruitment, MVR checks, placement.',
+  { id:'driver-hiring', title:'Driver Hiring',          price:'$500 solo - $750 team', icon:'hiring', popular: false, img:'https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=600&q=80', desc:'CDL-A recruitment, MVR checks, placement.',
     scope:['CDL-A & non-CDL recruitment','Background checks','MVR & PSP verification','Drug testing setup','Driver onboarding','Retention strategies'],
     benefits:['Placement in 2–3 business days','Free replacement guarantee','Reduce hiring costs','Proper document vetting'] },
-  { id:'logbook',       title:'Logbook Management',     price:'From $100',      icon:'logbook',     desc:'ELD, HOS, log audits, training & support.',
+  { id:'logbook',       title:'Logbook Management',     price:'From $100',      icon:'logbook',     popular: false, img:'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80', desc:'ELD, HOS, log audits, training & support.',
     scope:['ELD compliance monitoring','HOS tracking','Daily log auditing','HOS issues review','Training on rules','ELD troubleshooting'],
     benefits:['Stay HOS compliant','Identify issues early','Maximize legal drive time','Reduce DOT audit stress'] },
-  { id:'trailer-rental',title:'Trailer Rental',         price:'From $800/week', icon:'trailer',     desc:'Dry van, reefer, flatbed, step deck & more.',
+  { id:'trailer-rental',title:'Trailer Rental',         price:'From $800/week', icon:'trailer',     popular: false, img:'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80', desc:'Dry van, reefer, flatbed, step deck & more.',
     scope:['Weekly/monthly options','Dry Van, Reefer, Flatbed','Written maintenance terms','Flexible terms','Availability check','Match to your loads'],
     benefits:['Scale your fleet flexibly','Well-maintained equipment','Compare cash requirements','Match equipment to loads'] }
 ];
@@ -111,19 +112,19 @@ const HIRE_STATES = {
 // ICON RENDERER
 // ============================================================================
 function ServiceIcon({ type, size = 'md' }) {
-  const box  = size === 'sm' ? 'w-11 h-11 rounded-xl' : 'w-14 h-14 rounded-2xl';
-  const icon = size === 'sm' ? 'w-5 h-5' : 'w-7 h-7';
+  const box  = size === 'sm' ? 'w-11 h-11 rounded-xl' : 'w-12 h-12 rounded-2xl';
+  const icon = size === 'sm' ? 'w-5 h-5' : 'w-6 h-6';
   return (
-    <div className={`${box} bg-gradient-to-br from-[#E6F0FF] to-white border border-blue-200/80 shadow-[0_6px_16px_rgba(0,102,255,0.12),inset_0_1px_1px_#fff] flex items-center justify-center text-[#0066FF] relative shrink-0`}>
-      {type === 'dispatch'   && <Truck      className={icon} strokeWidth={2} />}
-      {type === 'mc'         && <ShieldCheck className={icon} strokeWidth={2} />}
-      {type === 'factoring'  && <DollarSign  className={icon} strokeWidth={2} />}
-      {type === 'compliance' && <FileCheck   className={icon} strokeWidth={2} />}
-      {type === 'accounting' && <Calculator  className={icon} strokeWidth={2} />}
-      {type === 'hiring'     && <Users       className={icon} strokeWidth={2} />}
-      {type === 'logbook'    && <Clock       className={icon} strokeWidth={2} />}
-      {type === 'trailer'    && <Layers      className={icon} strokeWidth={2} />}
-      {type === 'web'        && <Monitor     className={icon} strokeWidth={2} />}
+    <div className={`${box} icon-box flex items-center justify-center text-white relative shrink-0`}>
+      {type === 'dispatch'   && <Truck             className={icon} strokeWidth={2} />}
+      {type === 'mc'         && <ShieldCheck       className={icon} strokeWidth={2} />}
+      {type === 'factoring'  && <DollarSign        className={icon} strokeWidth={2} />}
+      {type === 'compliance' && <FileCheck         className={icon} strokeWidth={2} />}
+      {type === 'accounting' && <Calculator        className={icon} strokeWidth={2} />}
+      {type === 'hiring'     && <UserCheck         className={icon} strokeWidth={2} />}
+      {type === 'logbook'    && <Clock             className={icon} strokeWidth={2} />}
+      {type === 'trailer'    && <Container         className={icon} strokeWidth={2} />}
+      {type === 'web'        && <Globe             className={icon} strokeWidth={2} />}
     </div>
   );
 }
@@ -573,56 +574,217 @@ export default function App() {
   );
 
   const Services = () => (
-    <section className="glass-panel rounded-3xl p-6 sm:p-10 lg:p-12 space-y-8">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div className="space-y-2">
-          <div className="inline-flex px-3 py-1 rounded-full bg-[#E6F0FF] text-[#0066FF] text-xs font-bold">Complete Trucking Business Stack</div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A]">Our Services</h2>
-          <p className="text-sm text-[#475569] max-w-2xl">Everything you need to keep your business moving. Click any card to review full scope and pricing.</p>
+    <section
+      className="rounded-3xl p-4 sm:p-8 relative"
+      style={{
+        fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+        background: 'linear-gradient(180deg, #eef5ff 0%, #f8fbff 40%, #ffffff 100%)',
+        border: '1.5px solid rgba(255, 255, 255, 0.9)',
+        boxShadow: '0 20px 50px -12px rgba(15, 76, 189, 0.08)'
+      }}
+    >
+      {/* HERO SECTION */}
+      <div className="relative rounded-3xl overflow-hidden mb-8 min-h-[270px] flex items-center">
+        {/* Right-side Highway & Truck Background */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1800&q=85"
+            alt="Blue Semi Truck on Highway"
+            className="w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 hero-fade"></div>
         </div>
-        <a href={COMPANY.phoneHref} className="px-5 py-2.5 rounded-full bg-[#E6F0FF] text-[#0066FF] font-bold text-xs flex items-center gap-2 self-start">
-          <Phone className="w-4 h-4" />{COMPANY.phone}
-        </a>
+
+        {/* Subtle USA Route Map SVG Overlay */}
+        <svg className="hidden lg:block absolute left-[38%] top-4 w-72 h-44 opacity-80 z-10 pointer-events-none" viewBox="0 0 300 180" fill="none">
+          <path d="M30,40 L260,30 L280,90 L240,150 L140,160 L40,130 Z" fill="#60a5fa" fillOpacity="0.28" stroke="#93c5fd" strokeWidth="1.5" />
+          <path d="M55,85 Q140,40 230,75" stroke="#ffffff" strokeWidth="2" strokeDasharray="4 2" fill="none" />
+          <path d="M85,115 Q160,80 220,125" stroke="#ffffff" strokeWidth="1.5" fill="none" />
+          <circle cx="55" cy="85" r="5" fill="#ffffff" />
+          <circle cx="85" cy="115" r="5" fill="#ffffff" />
+          <circle cx="230" cy="75" r="5" fill="#ffffff" />
+          <circle cx="220" cy="125" r="5" fill="#ffffff" />
+        </svg>
+
+        {/* Left Hero Content */}
+        <div className="relative z-10 max-w-xl py-6 px-2 sm:px-6">
+          {/* Pill Badge */}
+          <button
+            onClick={() => nav('services')}
+            className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-md border border-blue-100 shadow-sm px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold text-blue-600 mb-5 hover:bg-white transition cursor-pointer"
+          >
+            <Home className="w-4 h-4 fill-blue-600 text-blue-600" />
+            <span>Complete Trucking Business Stack</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
+
+          {/* Main Heading */}
+          <h2 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 mb-4">
+            Our <span className="text-blue-600">Services</span>
+          </h2>
+
+          {/* Subtitle */}
+          <p className="text-slate-700 text-sm sm:text-base font-medium leading-relaxed max-w-md mb-5">
+            Everything you need to keep your business moving. Click any card to review full scope and pricing.
+          </p>
+
+          {/* Blue Accent Line */}
+          <div className="w-16 h-1.5 bg-blue-600 rounded-full"></div>
+        </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      {/* 8-CARD SERVICES GRID */}
+      <div id="services-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
         {CORE_SERVICES.map(srv => (
-          <div key={srv.id} onClick={() => setSelService(srv)} className="glass-card rounded-2xl p-6 flex flex-col justify-between cursor-pointer group">
-            <div className="space-y-3.5">
-              <ServiceIcon type={srv.icon} />
-              <div>
-                <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#0066FF] transition">{srv.title}</h3>
-                <p className="text-xs font-bold text-[#0066FF] mt-1">{srv.price}</p>
+          <div
+            key={srv.id}
+            onClick={() => setSelService(srv)}
+            className="glass-card rounded-3xl p-5 relative overflow-hidden flex flex-col justify-between min-h-[250px] cursor-pointer group"
+          >
+            {/* Right Background Visual */}
+            <img
+              src={srv.img}
+              alt={srv.title}
+              className="absolute right-0 top-0 h-full w-3/5 object-cover opacity-35 group-hover:opacity-45 transition card-img-mask pointer-events-none"
+            />
+
+            {srv.popular && (
+              <div className="absolute top-3.5 right-3.5 bg-blue-600 text-white text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-sm z-10">
+                <Star className="w-3 h-3 fill-white" />
+                <span>Most Popular</span>
               </div>
-              <p className="text-xs text-[#64748B] leading-relaxed">{srv.desc}</p>
+            )}
+
+            {/* Top Card Content */}
+            <div className="relative z-10 pr-12">
+              <div className="mb-4">
+                <ServiceIcon type={srv.icon} />
+              </div>
+
+              <h3 className="text-lg font-extrabold text-slate-900 leading-snug">{srv.title}</h3>
+              <p className="text-blue-600 font-bold text-sm mt-1 leading-snug">{srv.price}</p>
+              <p className="text-slate-600 text-xs mt-2.5 leading-relaxed">{srv.desc}</p>
             </div>
-            <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0066FF]">
-              <span>View Scope</span><ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+
+            {/* Bottom Action Pill */}
+            <div className="relative z-10 mt-5">
+              <span className="inline-flex items-center gap-2 bg-white/90 group-hover:bg-blue-600 group-hover:text-white text-blue-700 border border-blue-300 text-xs font-bold px-3.5 py-1.5 rounded-full transition shadow-sm">
+                <span>View Scope</span>
+                <span className="w-4 h-4 rounded-full bg-blue-600 text-white group-hover:bg-white group-hover:text-blue-600 flex items-center justify-center transition">
+                  <ArrowRight className="w-3 h-3" />
+                </span>
+              </span>
             </div>
           </div>
         ))}
       </div>
-      {/* Website add-on card */}
-      <div className="glass-card rounded-3xl p-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div className="space-y-2 flex-1">
-          <ServiceIcon type="web" size="sm" />
-          <h3 className="text-xl font-extrabold text-[#0F172A]">Website Design</h3>
-          <p className="text-sm font-bold text-[#0066FF]">$274 one-time · 1st Year Hosting Included</p>
-          <p className="text-xs text-[#475569]">Custom, SEO-optimized, mobile-responsive websites — trucking, construction, healthcare, and any industry.</p>
-          <button onClick={() => nav('website')} className="px-5 py-2.5 rounded-full bg-[#0066FF] text-white text-xs font-bold inline-flex items-center gap-1.5 transition hover:bg-[#0052CC]">
-            Get Your Website <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
-        <div className="w-full sm:w-48 h-32 rounded-2xl bg-gradient-to-br from-[#E6F0FF] to-white border border-blue-200 p-3 flex flex-col justify-between shadow-inner shrink-0">
-          <div className="flex items-center gap-1">
-            <span className="w-2 h-2 rounded-full bg-rose-400" /><span className="w-2 h-2 rounded-full bg-amber-400" /><span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span className="text-[9px] text-slate-400 ml-1 font-mono">yourfleet.com</span>
+
+      {/* BOTTOM WEBSITE DESIGN BANNER */}
+      <div className="glass-card rounded-3xl p-4 sm:p-6 relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          {/* Left Info Section */}
+          <div className="lg:col-span-5 flex items-start sm:items-center gap-4 sm:gap-5 z-10">
+            {/* Globe Icon Circle */}
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full icon-box flex items-center justify-center shrink-0 ring-8 ring-blue-100">
+              <Globe className="w-9 h-9 sm:w-10 sm:h-10 text-white" />
+            </div>
+
+            <div>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">Website Design</h3>
+              <p className="text-blue-600 font-bold text-sm sm:text-base mt-0.5">
+                $274 one-time • 1st Year Hosting Included
+              </p>
+              <p className="text-slate-600 text-xs sm:text-sm mt-1.5 leading-snug max-w-md">
+                Custom, SEO-optimized, mobile-responsive websites — trucking, construction, healthcare, and any industry.
+              </p>
+              <button
+                onClick={() =>
+                  setSelService({
+                    id: 'website',
+                    title: 'Website Design',
+                    price: '$274 one-time • 1st Year Hosting Included',
+                    icon: 'web',
+                    desc: 'Custom 5-page responsive website, domain setup, SSL security, quote request forms, and SEO optimization tailored for carriers and brokers.',
+                    scope: [
+                      'Custom 5-page responsive website',
+                      'Domain setup & SSL security',
+                      'Quote request & contact forms',
+                      'SEO optimization for carriers & brokers',
+                      '1st year hosting included',
+                      'Delivered in 5–7 business days'
+                    ],
+                    benefits: [
+                      'Professional online presence',
+                      'Mobile & desktop ready',
+                      'Google Analytics & Maps included',
+                      'Convert broker & shipper visits'
+                    ],
+                    _isWebsite: true
+                  })
+                }
+                className="mt-3 inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-full shadow transition cursor-pointer"
+              >
+                <span>Get Your Website</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
-          <div className="bg-white rounded-xl p-2.5 border border-blue-100 space-y-1.5">
-            <div className="h-2 w-16 bg-[#0066FF] rounded-full" />
-            <div className="h-1.5 w-24 bg-slate-200 rounded-full" />
-            <div className="mt-1.5 inline-block px-2 py-0.5 rounded bg-[#0066FF] text-white text-[8px] font-bold">Get a Quote</div>
+
+          {/* Middle Truck Highway Image Banner */}
+          <div className="lg:col-span-4 h-36 sm:h-40 rounded-2xl overflow-hidden relative hidden sm:block">
+            <img
+              src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=900&q=80"
+              alt="Fleet Highway"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 via-transparent to-transparent"></div>
           </div>
-          <p className="text-[10px] font-semibold text-[#0066FF] text-center">Mobile + Desktop Ready</p>
+
+          {/* Right Browser Mockup Widget */}
+          <div className="lg:col-span-3 z-10">
+            <div className="bg-white/95 border border-blue-100 rounded-2xl p-4 shadow-md text-center">
+              {/* Mac Window Dots */}
+              <div className="flex items-center gap-1.5 mb-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              </div>
+              <div className="text-slate-800 font-extrabold text-base mb-3">yourFleet.com</div>
+              <button
+                onClick={() =>
+                  setSelService({
+                    id: 'website-quote',
+                    title: 'Website Design Quote',
+                    price: '$274 one-time',
+                    icon: 'web',
+                    desc: 'Launch your custom trucking company website in 5 business days with hosting and domain configuration included.',
+                    scope: [
+                      'Custom 5-page responsive website',
+                      'Domain & hosting configuration',
+                      'Quote request & lead forms',
+                      'Mobile & desktop responsive layout',
+                      'Google Analytics & SEO setup',
+                      '5-day turnaround'
+                    ],
+                    benefits: [
+                      'All-in $274 one-time pricing',
+                      '1st year hosting free',
+                      'Zero monthly design fees',
+                      'Ready for brokers & shippers'
+                    ],
+                    _isWebsite: true
+                  })
+                }
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm py-2.5 rounded-full shadow-md shadow-blue-500/20 transition mb-2.5 cursor-pointer"
+              >
+                Get a Quote
+              </button>
+              <div className="inline-flex items-center justify-center gap-1.5 text-[11px] font-semibold text-blue-600">
+                <MonitorSmartphone className="w-3.5 h-3.5" />
+                <span>Mobile • Desktop Ready</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1546,7 +1708,10 @@ export default function App() {
             </div>
             <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
               <a href={COMPANY.phoneHref} className="px-5 py-2.5 rounded-full liquid-btn-secondary text-xs font-bold flex items-center gap-2"><Phone className="w-4 h-4 text-[#0066FF]" />{COMPANY.phone}</a>
-              <button onClick={() => { setSelService(null); nav('get-started'); }} className="px-6 py-2.5 rounded-full liquid-btn-primary text-xs font-bold shadow-md cursor-pointer">Get Started →</button>
+              <div className="flex items-center gap-2">
+                <button onClick={() => setSelService(null)} className="px-4 py-2.5 rounded-full text-xs font-bold text-slate-600 hover:bg-slate-100 transition cursor-pointer">Close</button>
+                <button onClick={() => { const isWeb = selService._isWebsite; setSelService(null); nav(isWeb ? 'website' : 'get-started'); }} className="px-6 py-2.5 rounded-full liquid-btn-primary text-xs font-bold shadow-md cursor-pointer">Get Started →</button>
+              </div>
             </div>
           </div>
         </div>
